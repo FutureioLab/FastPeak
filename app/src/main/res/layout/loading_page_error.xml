@@ -1,0 +1,19 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+    <!--<ImageView-->
+    <!--android:id="@+id/iv_reload"-->
+    <!--android:layout_width="100dp"-->
+    <!--android:layout_height="100dp"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:scaleType="centerInside"-->
+    <!--android:src="@mipmap/ic_error_page" />-->
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="error"/>
+</RelativeLayout>
