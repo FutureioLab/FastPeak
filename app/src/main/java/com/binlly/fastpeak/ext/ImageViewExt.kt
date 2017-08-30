@@ -9,6 +9,7 @@ import com.binlly.fastpeak.base.glide.progress.OnGlideImageViewListener
 import com.binlly.fastpeak.base.glide.progress.OnProgressListener
 import com.binlly.fastpeak.base.glide.progress.ProgressManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
@@ -23,29 +24,30 @@ import com.bumptech.glide.request.target.Target
 
 private val mMainHandler = Handler(Looper.getMainLooper())
 
-fun ImageView.loadCircle(uri: Any?, holder: Int = resources.getColor(R.color.place_holder),
-                         listener: OnGlideImageViewListener? = null) {
-    val options = RequestOptions().placeholder(holder).error(holder).circleCrop()
-    load(uri, options, listener)
-}
-
 fun ImageView.loadNoCache(uri: Any?, holder: Int = resources.getColor(R.color.place_holder),
                           listener: OnGlideImageViewListener? = null) {
     val options = RequestOptions().placeholder(holder).error(holder).diskCacheStrategy(
             DiskCacheStrategy.NONE)
-    load(uri, options, listener)
+    load(uri, options, null, listener)
+}
+
+fun ImageView.loadCircle(uri: Any?, holder: Int = resources.getColor(R.color.place_holder),
+                         listener: OnGlideImageViewListener? = null) {
+    val options = RequestOptions().placeholder(holder).error(holder).circleCrop()
+    load(uri, options, null, listener)
 }
 
 fun ImageView.load(uri: Any?, holder: Int = resources.getColor(R.color.place_holder),
                    listener: OnGlideImageViewListener? = null) {
     val options = RequestOptions().placeholder(holder).error(holder)
-    load(uri, options, listener)
+    load(uri, options, null, listener)
 }
 
-fun ImageView.load(uri: Any?, options: RequestOptions, listener: OnGlideImageViewListener? = null) {
+fun ImageView.load(uri: Any?, options: RequestOptions, thumbnail: RequestBuilder<Drawable>? = null,
+                   listener: OnGlideImageViewListener? = null) {
     if (checkUriParams(uri)) addListener(this, listener)
 
-    val requestBuilder = Glide.with(context).load(uri).apply(options)
+    val requestBuilder = Glide.with(context).load(uri).apply(options).thumbnail(thumbnail)
     listener?.let {
         requestBuilder.listener(object: RequestListener<Drawable> {
             override fun onResourceReady(resource: Drawable?, model: Any?,
