@@ -2,15 +2,35 @@ package com.binlly.fastpeak.base.mvp
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasFragmentInjector
+import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
 
 /**
  * Created by yy on 2017/8/24.
  */
-abstract class BaseMvpActivity<P: BaseActivityPresenter>: BaseActivity(), BaseMvpView<P> {
+abstract class BaseMvpActivity<P: BaseActivityPresenter>: BaseActivity(),
+        BaseMvpView<P>,
+        HasFragmentInjector,
+        HasSupportFragmentInjector {
+
+    @Inject lateinit var supportFragmentInjector: DispatchingAndroidInjector<Fragment>
+    @Inject lateinit var frameworkFragmentInjector: DispatchingAndroidInjector<android.app.Fragment>
 
     @Inject lateinit var P: P
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+        return supportFragmentInjector
+    }
+
+    override fun fragmentInjector(): AndroidInjector<android.app.Fragment> {
+        return frameworkFragmentInjector
+    }
 
     override fun P(): P {
         return P
@@ -21,6 +41,7 @@ abstract class BaseMvpActivity<P: BaseActivityPresenter>: BaseActivity(), BaseMv
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         P.onCreate()
     }

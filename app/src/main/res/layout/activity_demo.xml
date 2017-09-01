@@ -8,8 +8,9 @@
     tools:context="com.binlly.fastpeak.business.demo.activity.DemoActivity">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/toolbar_height"
         android:background="@color/colorPrimary"
         app:title="Demo"
         app:titleTextColor="@color/white"/>

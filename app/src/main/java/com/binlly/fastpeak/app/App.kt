@@ -4,6 +4,10 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import com.binlly.fastpeak.BuildConfig
+import com.binlly.fastpeak.base.logger.LogLevel
+import com.binlly.fastpeak.base.logger.logLevel
+import com.binlly.fastpeak.base.logger.logable
 import com.binlly.fastpeak.di.DaggerAppComponent
 import com.binlly.fastpeak.service.Services
 import dagger.android.AndroidInjector
@@ -37,6 +41,12 @@ class App: Application(),
         DaggerAppComponent.builder().create(this).inject(this)
         app = this
         Services.app = app
+        initLogger()
+    }
+
+    private fun initLogger() {
+        logable = BuildConfig.DEBUG
+        logLevel = LogLevel.DEBUG
     }
 
     companion object {

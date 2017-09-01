@@ -4,6 +4,8 @@
     package="com.binlly.fastpeak">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -18,6 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <meta-data
+            android:name="APIV"
+            android:value="1"/>
+
         <activity
             android:name=".business.demo.activity.DemoActivity"
             android:theme="@style/PrimaryTheme">
@@ -31,6 +37,10 @@
 
         <activity
             android:name=".business.demo.fragment.DemoFragmentActivity"
+            android:theme="@style/PrimaryTheme"/>
+
+        <activity
+            android:name=".business.test.TestActivity"
             android:theme="@style/PrimaryTheme"/>
 
     </application>
