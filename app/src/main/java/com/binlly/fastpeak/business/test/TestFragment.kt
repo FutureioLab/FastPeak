@@ -39,6 +39,7 @@ class TestFragment: BaseFragment() {
         recycler.adapter = mAdapter
 
         mAdapter.setNewData(testData)
+        setPageSucceed()
     }
 
     private val testData: List<TestModel>
