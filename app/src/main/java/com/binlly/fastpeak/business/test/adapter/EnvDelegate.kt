@@ -15,6 +15,7 @@ import com.binlly.fastpeak.Build
 import com.binlly.fastpeak.R
 import com.binlly.fastpeak.business.demo.activity.DemoActivity
 import com.binlly.fastpeak.business.test.model.TestModel
+import com.binlly.fastpeak.service.Services
 import com.chad.library.adapter.base.BaseViewHolder
 
 /**
@@ -22,6 +23,8 @@ import com.chad.library.adapter.base.BaseViewHolder
  */
 
 class EnvDelegate(context: Context): BaseDelegate(context) {
+
+    private var dialog: AlertDialog? = null
 
     override val layoutResId: Int
         get() = R.layout.test_item_switch_env
@@ -42,21 +45,23 @@ class EnvDelegate(context: Context): BaseDelegate(context) {
     }
 
     private fun showDialog(env: TestModel.EnvModel) {
-        val pre = "切换到"
-        val suf = "需要杀掉进程重启"
-        val msgBuilder = SpannableStringBuilder(pre + env.value + suf)
-        msgBuilder.setSpan(ForegroundColorSpan(Color.parseColor("#e2001e")), pre.length,
-                pre.length + env.value.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        val builder = AlertDialog.Builder(context)
-        builder.setMessage(msgBuilder.toString())
-        val dialog = builder.create()
-        builder.setPositiveButton("重启") { _, _ ->
-            Build.env = env.key
-            restartApp()
-            dialog.dismiss()
+        if (dialog == null) {
+            val pre = "切换到"
+            val suf = "需要杀掉进程重启"
+            val msgBuilder = SpannableStringBuilder(pre + env.value + suf)
+            msgBuilder.setSpan(ForegroundColorSpan(Color.parseColor("#e2001e")), pre.length,
+                    pre.length + env.value.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            val builder = AlertDialog.Builder(context)
+            builder.setMessage(msgBuilder.toString())
+            builder.setPositiveButton("重启") { _, _ ->
+                Build.env = env.key
+                restartApp()
+                dialog?.dismiss()
+            }
+            builder.setNegativeButton("取消") { _, _ -> dialog?.dismiss() }
+            dialog = builder.create()
         }
-        builder.setNegativeButton("取消") { _, _ -> dialog.dismiss() }
-        dialog.show()
+        dialog?.show()
     }
 
     private fun restartApp() {
@@ -66,6 +71,6 @@ class EnvDelegate(context: Context): BaseDelegate(context) {
                 PendingIntent.FLAG_CANCEL_CURRENT)
         val mgr = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         mgr.set(AlarmManager.RTC, System.currentTimeMillis(), mPendingIntent)
-        System.exit(0)
+        Services.app.exit()
     }
 }
