@@ -1,2 +1,2 @@
 # FastPeak
-Android快速开发框架，基于MVP、Kotlin、Dagger2、Retrofit2、OkHttp3、Glide4等框架
+Android快速开发框架，基于MVP、Kotlin开发，旨在实现快速开发
