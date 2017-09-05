@@ -6,6 +6,10 @@
 
     <color name="white">#ffffff</color>
     <color name="text_color">#222222</color>
+    <color name="divider_color">#eeeeee</color>
+    <color name="background_gray">#f2f2f2</color>
+
+    <color name="place_holder">#eeeeee</color>
 
     <color name="transparent">#00000000</color>
 </resources>

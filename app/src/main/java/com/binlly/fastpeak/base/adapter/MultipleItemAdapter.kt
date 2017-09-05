@@ -14,7 +14,8 @@ import com.chad.library.adapter.base.entity.MultiItemEntity
  * Created by binlly on 2017/4/6.
  */
 
-class MultipleItemAdapter<T: MultiItemEntity>(data: List<T>): BaseMultiItemQuickAdapter<T, BaseViewHolder>(data) {
+open class MultipleItemAdapter<T: MultiItemEntity>(
+        data: List<T>?): BaseMultiItemQuickAdapter<T, BaseViewHolder>(data) {
 
     private var mMessageHandler: MessageHandler<T>? = null
 
@@ -38,7 +39,9 @@ class MultipleItemAdapter<T: MultiItemEntity>(data: List<T>): BaseMultiItemQuick
                                                 itemViewDelegate: ItemViewDelegate<T, V>) {
         addItemType(viewType, itemViewDelegate.getItemViewLayoutId())
         if (delegates.get(viewType) != null) {
-            throw IllegalArgumentException("An ItemViewDelegate is already registered for the viewType = " + viewType + ". Already registered ItemViewDelegate is " + delegates.get(viewType))
+            throw IllegalArgumentException(
+                    "An ItemViewDelegate is already registered for the viewType = " + viewType + ". Already registered ItemViewDelegate is " + delegates.get(
+                            viewType))
         }
         delegates.put(viewType, itemViewDelegate)
     }
@@ -46,7 +49,8 @@ class MultipleItemAdapter<T: MultiItemEntity>(data: List<T>): BaseMultiItemQuick
     override fun onCreateDefViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         var holder: BaseViewHolder? = null
         if (delegates.size() > 0) {
-            val delegate = delegates.get(viewType) ?: throw IllegalArgumentException("No ItemViewDelegateManager added that matches in data source")
+            val delegate = delegates.get(viewType) ?: throw IllegalArgumentException(
+                    "No ItemViewDelegateManager added that matches in data source")
 
             val view = mLayoutInflater.inflate(delegate.getItemViewLayoutId(), parent, false)
             holder = delegate.onCreateDefViewHolder(view)

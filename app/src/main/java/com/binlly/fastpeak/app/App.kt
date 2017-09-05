@@ -4,6 +4,10 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import com.binlly.fastpeak.BuildConfig
+import com.binlly.fastpeak.base.logger.LogLevel
+import com.binlly.fastpeak.base.logger.logLevel
+import com.binlly.fastpeak.base.logger.logable
 import com.binlly.fastpeak.di.DaggerAppComponent
 import com.binlly.fastpeak.service.Services
 import dagger.android.AndroidInjector
@@ -24,6 +28,8 @@ class App: Application(),
     @Inject lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
     @Inject lateinit var dispatchingFragmentInjector: DispatchingAndroidInjector<Fragment>
 
+    val activitys: MutableList<Activity> = ArrayList()
+
     override fun activityInjector(): AndroidInjector<Activity> {
         return dispatchingActivityInjector
     }
@@ -37,6 +43,12 @@ class App: Application(),
         DaggerAppComponent.builder().create(this).inject(this)
         app = this
         Services.app = app
+        initLogger()
+    }
+
+    private fun initLogger() {
+        logable = BuildConfig.DEBUG
+        logLevel = LogLevel.DEBUG
     }
 
     companion object {
@@ -45,26 +57,37 @@ class App: Application(),
         var mIsAppForeground: Boolean = false
     }
 
-    override fun onActivityCreated(p0: Activity?, p1: Bundle?) {
+    override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
+        activitys.add(activity)
     }
 
-    override fun onActivityStarted(p0: Activity?) {
+    override fun onActivityStarted(activity: Activity) {
     }
 
-    override fun onActivityResumed(p0: Activity?) {
+    override fun onActivityResumed(activity: Activity) {
         mIsAppForeground = true
     }
 
-    override fun onActivityPaused(p0: Activity?) {
+    override fun onActivityPaused(activity: Activity) {
         mIsAppForeground = false
     }
 
-    override fun onActivityStopped(p0: Activity?) {
+    override fun onActivityStopped(activity: Activity) {
     }
 
-    override fun onActivityDestroyed(p0: Activity?) {
+    override fun onActivityDestroyed(activity: Activity) {
+        activitys.remove(activity)
     }
 
-    override fun onActivitySaveInstanceState(p0: Activity?, p1: Bundle?) {
+    override fun onActivitySaveInstanceState(activity: Activity, bundle: Bundle?) {
+    }
+
+    private fun finishAllActivitys() {
+        activitys.forEach { it.finish() }
+    }
+
+    fun exit() {
+        finishAllActivitys()
+        System.exit(0)
     }
 }

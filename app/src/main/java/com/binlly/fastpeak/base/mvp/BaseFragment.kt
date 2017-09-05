@@ -1,22 +1,31 @@
 package com.binlly.fastpeak.base.mvp
 
+import android.content.Context
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.binlly.fastpeak.R
+import com.binlly.fastpeak.base.logger.Logger
 import com.binlly.fastpeak.base.widget.LoadingPage
 import com.binlly.fastpeak.base.widget.LoadingProgressDialog
-import dagger.android.support.DaggerFragment
 import org.greenrobot.eventbus.EventBus
 
 /**
  * Created by yy on 2017/8/25.
  */
-abstract class BaseFragment: DaggerFragment(), BaseView {
+abstract class BaseFragment: Fragment(), BaseView {
+
+    val logger = Logger()
 
     private val loadingDia: LoadingProgressDialog by lazy { LoadingProgressDialog(context) }
     private lateinit var loadingPage: LoadingPage
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        logger.init(this::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +54,7 @@ abstract class BaseFragment: DaggerFragment(), BaseView {
         return loadingPage
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         restoreFragmentState(savedInstanceState)
 
@@ -185,4 +194,45 @@ abstract class BaseFragment: DaggerFragment(), BaseView {
             }
             return view
         }
+
+
+    fun v(s: String?) {
+        logger.v(s)
+    }
+
+    fun v(tag: String, s: String?) {
+        logger.v(tag, s)
+    }
+
+    fun d(s: String?) {
+        logger.v(s)
+    }
+
+    fun d(tag: String, s: String?) {
+        logger.v(tag, s)
+    }
+
+    fun i(s: String?) {
+        logger.v(s)
+    }
+
+    fun i(tag: String, s: String?) {
+        logger.v(tag, s)
+    }
+
+    fun w(s: String?) {
+        logger.v(s)
+    }
+
+    fun w(tag: String, s: String?) {
+        logger.v(tag, s)
+    }
+
+    fun e(s: String?) {
+        logger.v(s)
+    }
+
+    fun e(tag: String, s: String?) {
+        logger.v(tag, s)
+    }
 }

@@ -12,4 +12,10 @@ object RetrofitConfig {
     fun getBaseUrl(): String {
         return if (BuildConfig.DEBUG) BASE_URL_DEBUG else BASE_URL
     }
+
+    val debugHost: String
+        get() = BASE_URL_DEBUG
+
+    val onlineHost: String
+        get() = BASE_URL
 }

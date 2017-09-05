@@ -2,15 +2,18 @@ package com.binlly.fastpeak.base.mvp
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import com.binlly.fastpeak.base.logger.Logger
 import com.binlly.fastpeak.base.widget.LoadingProgressDialog
-import dagger.android.support.DaggerAppCompatActivity
 import org.greenrobot.eventbus.EventBus
 
 
 /**
  * Created by yy on 2017/8/23.
  */
-abstract class BaseActivity: DaggerAppCompatActivity(), BaseView {
+abstract class BaseActivity: AppCompatActivity(), BaseView {
+
+    val logger = Logger()
 
     private val loadingDia: LoadingProgressDialog by lazy { LoadingProgressDialog(this) }
 
@@ -34,6 +37,8 @@ abstract class BaseActivity: DaggerAppCompatActivity(), BaseView {
             finish()
             return
         }
+
+        logger.init(this::class.java)
 
         if (isNeedEventBus()) EventBus.getDefault().register(this)
 
@@ -102,5 +107,45 @@ abstract class BaseActivity: DaggerAppCompatActivity(), BaseView {
 
     override fun showLoading() {
         showLoading(null)
+    }
+
+    fun v(s: String?) {
+        logger.v(s)
+    }
+
+    fun v(tag: String, s: String?) {
+        logger.v(tag, s)
+    }
+
+    fun d(s: String?) {
+        logger.v(s)
+    }
+
+    fun d(tag: String, s: String?) {
+        logger.v(tag, s)
+    }
+
+    fun i(s: String?) {
+        logger.v(s)
+    }
+
+    fun i(tag: String, s: String?) {
+        logger.v(tag, s)
+    }
+
+    fun w(s: String?) {
+        logger.v(s)
+    }
+
+    fun w(tag: String, s: String?) {
+        logger.v(tag, s)
+    }
+
+    fun e(s: String?) {
+        logger.v(s)
+    }
+
+    fun e(tag: String, s: String?) {
+        logger.v(tag, s)
     }
 }
