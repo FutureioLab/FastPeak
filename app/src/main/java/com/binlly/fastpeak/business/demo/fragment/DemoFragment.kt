@@ -34,8 +34,7 @@ class DemoFragment: BaseMvpFragment<DemoFragmentPresenter>(), DemoFragmentContra
                 "http://www.sogoupc.com/uploads/allimg/120309/1-1203091U525.jpg",
                 "http://www.1tong.com/uploads/wallpaper/landscapes/404-2-1440x900.jpg",
                 "http://pic4.bbzhi.com/renwenbizhi/gaoqingkuanpingfengjingzhuomianbizhi" + "/gaoqingkuanpingfengjingzhuomianbizhi_350914_10.jpg",
-                "http://pic1.win4000.com/wallpaper/b/51fb21b44fcc6.jpg",
-                "http://172.16.42.92:11888/download/tupian.jpg")
+                "http://pic1.win4000.com/wallpaper/b/51fb21b44fcc6.jpg")
 
         image_1.loadCircle(R.color.colorPrimary)
         image_1.setOnClickListener {
