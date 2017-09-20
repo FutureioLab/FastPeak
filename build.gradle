@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.support_version = '26.0.1'
+    ext.support_version = '26.1.0'
     ext.kotlin_version = '1.1.4-3'
     ext.anko_version = '0.10.1'
     ext.retrofit_version = '2.3.0'
@@ -14,11 +14,12 @@ buildscript {
         maven { url "https://maven.google.com" }
         maven { url "https://jitpack.io" }
         maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+        //        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
         //        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-beta4'
+        classpath 'com.android.tools.build:gradle:3.0.0-beta6'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-noarg:$kotlin_version"
@@ -36,6 +37,7 @@ allprojects {
         maven { url "https://maven.google.com" }
         maven { url "https://jitpack.io" }
         maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+        //        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
         //        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
     }
 }
