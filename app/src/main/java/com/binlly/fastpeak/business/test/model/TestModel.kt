@@ -16,6 +16,12 @@ class TestModel: MultiItemEntity, Serializable {
     val isBuildType: Boolean
         get() = item_type == TYPE_BUILD
 
+    val isMockType: Boolean
+        get() = item_type == TYPE_MOCK
+
+    val isRouterType: Boolean
+        get() = item_type == TYPE_ROUTER
+
 
     override fun getItemType(): Int {
         return item_type
@@ -24,6 +30,8 @@ class TestModel: MultiItemEntity, Serializable {
     lateinit var section: String
     lateinit var env: EnvModel
     lateinit var build: BuildModel
+    lateinit var mock: MockModel
+    lateinit var router: RouterModel
 
     var valueColor: Int = 0
 
@@ -31,11 +39,17 @@ class TestModel: MultiItemEntity, Serializable {
 
     data class BuildModel(var key: String, var value: String)
 
+    data class MockModel(var key: String, var value: String)
+
+    data class RouterModel(var key: String, var value: String)
+
     companion object {
         private const val serialVersionUID = -4241242337755076267L
 
         val TYPE_SECTION = 0
         val TYPE_ENV = 1
         val TYPE_BUILD = 2
+        val TYPE_MOCK = 3
+        val TYPE_ROUTER = 4
     }
 }

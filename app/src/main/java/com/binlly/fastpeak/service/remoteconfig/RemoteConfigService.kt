@@ -7,6 +7,13 @@ import com.binlly.fastpeak.config.AppConfigModel
  */
 interface RemoteConfigService {
     val config: AppConfigModel?
+    val mockRouter: Map<String, Int>
 
     fun saveConfig(configModel: AppConfigModel)
+
+    fun pullMockConfig(listener: () -> Unit)
+
+    fun getRouter(): Map<String, Int>
+
+    fun isMock(key: String): Boolean
 }

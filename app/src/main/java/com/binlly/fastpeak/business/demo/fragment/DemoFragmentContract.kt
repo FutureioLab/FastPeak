@@ -13,6 +13,7 @@ interface DemoFragmentContract {
 
     interface Presenter: BaseFragmentPresenter {
         fun requestDemo(observer: RxObserver<DemoModel>)
+        fun requestImageList(observer: RxObserver<DemoFragmentModel>)
     }
 
 }

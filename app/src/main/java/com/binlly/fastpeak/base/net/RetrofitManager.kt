@@ -19,6 +19,8 @@ object RetrofitManager {
 
     private val okHttpClient = createOkHttpClient()
     private var serverRetrofit = createServerRetrofit(RetrofitConfig.getBaseUrl())
+    private var mockRetrofit = createServerRetrofit("http://127.0.0.1")
+
     /**
      * 创建OkHttp
      *
@@ -29,7 +31,8 @@ object RetrofitManager {
         val cacheFile = File(Services.app().cacheDir, "okhttp_cache")
         val cache = Cache(cacheFile, (1024 * 1024 * 100).toLong()) //100Mb缓存
         val cacheControlInterceptor = CacheControlInterceptor()
-        val builder = OkHttpClient.Builder().addInterceptor(cacheControlInterceptor).cache(cache).followRedirects(true)
+        val builder = OkHttpClient.Builder().addInterceptor(cacheControlInterceptor).cache(
+                cache).followRedirects(true)
         if (BuildConfig.DEBUG) {
             val bodyInterceptor = HttpLoggingInterceptor()
             bodyInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -54,6 +57,10 @@ object RetrofitManager {
         serverRetrofit = createServerRetrofit(serverUrl)
     }
 
+    fun reCreateMockRetrofit(mockHost: String) {
+        mockRetrofit = createRetrofit(mockHost)
+    }
+
     /**
      * 创建Server服务器对应的Retrofit
      *
@@ -66,8 +73,10 @@ object RetrofitManager {
     /**
      * 创建retrofit实例
      */
-    private fun createRetrofit(baseUrl: String): Retrofit {
-        return Retrofit.Builder().baseUrl(baseUrl).client(okHttpClient).addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build()
+    fun createRetrofit(baseUrl: String): Retrofit {
+        return Retrofit.Builder().baseUrl(baseUrl).client(okHttpClient).addConverterFactory(
+                GsonConverterFactory.create()).addCallAdapterFactory(
+                RxJava2CallAdapterFactory.create()).build()
     }
 
     /**
@@ -79,5 +88,9 @@ object RetrofitManager {
     </T> */
     fun <T> create(clazz: Class<T>): T {
         return serverRetrofit.create(clazz)
+    }
+
+    fun <T> createMock(clazz: Class<T>): T {
+        return mockRetrofit.create(clazz)
     }
 }

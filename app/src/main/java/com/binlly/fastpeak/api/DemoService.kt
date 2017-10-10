@@ -1,6 +1,7 @@
 package com.binlly.fastpeak.api
 
 import com.binlly.fastpeak.base.net.HttpResult
+import com.binlly.fastpeak.business.demo.fragment.DemoFragmentModel
 import com.binlly.fastpeak.business.demo.model.DemoModel
 import io.reactivex.Observable
 import retrofit2.http.FieldMap
@@ -15,4 +16,8 @@ interface DemoService {
     @FormUrlEncoded
     @POST(ApiConfig.URL_DEMO)
     fun requestDemo(@FieldMap fieldMap: Map<String, String>): Observable<HttpResult<DemoModel>>
+
+    @FormUrlEncoded
+    @POST(ApiConfig.URL_IMAGE_LIST)
+    fun requestImageList(@FieldMap fieldMap: Map<String, String>): Observable<HttpResult<DemoFragmentModel>>
 }

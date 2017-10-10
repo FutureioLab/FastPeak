@@ -36,7 +36,7 @@ abstract class RxObserver<T> constructor(private val baseView: BaseView? = null,
         disposables = CompositeDisposable()
     }
 
-    override fun onNext(t: T) {
+    override fun onNext(result: T) {
 
     }
 

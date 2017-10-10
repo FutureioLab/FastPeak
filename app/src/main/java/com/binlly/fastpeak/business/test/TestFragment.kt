@@ -13,6 +13,7 @@ import com.binlly.fastpeak.base.mvp.BaseFragment
 import com.binlly.fastpeak.base.net.RetrofitConfig
 import com.binlly.fastpeak.business.test.adapter.TestAdapter
 import com.binlly.fastpeak.business.test.model.TestModel
+import com.binlly.fastpeak.repo.RemoteRepo
 import com.binlly.fastpeak.service.Services
 import kotlinx.android.synthetic.main.fragment_test.*
 import java.util.*
@@ -34,12 +35,16 @@ class TestFragment: BaseFragment() {
     }
 
     override fun initView() {
-        mAdapter = TestAdapter(context, null)
+        mAdapter = TestAdapter(context, null, this)
         recycler.layoutManager = LinearLayoutManager(activity)
         recycler.adapter = mAdapter
 
         mAdapter.setNewData(testData)
         setPageSucceed()
+    }
+
+    fun refresh() {
+        mAdapter.setNewData(testData)
     }
 
     private val testData: List<TestModel>
@@ -49,6 +54,17 @@ class TestFragment: BaseFragment() {
 
             datas.add(getEnvModel(ENV_DEBUG, "测试环境"))
             datas.add(getEnvModel(ENV_ONLINE, "线上环境"))
+
+            if (BuildConfig.DEBUG) { //只在测试环境下打开此项设置
+                datas.add(getSection("设置Mock服务器(即时生效)"))
+                datas.add(getMockModel("mockHost", RemoteRepo.mockHost))
+            }
+
+            val router = Services.remoteConfig().getRouter()
+            if (BuildConfig.DEBUG && router.isNotEmpty()) { //只在测试环境下打开此项设置
+                datas.add(getSection("Mock路由表"))
+                for ((key, value) in router) datas.add(getRouterModel(key, value.toString()))
+            }
 
             datas.add(getSection("版本信息"))
             datas.add(getBuildModel("ApplicationId", BuildConfig.APPLICATION_ID))
@@ -85,6 +101,24 @@ class TestFragment: BaseFragment() {
         model.valueColor = Color.parseColor("#222222")
         model.build = buildModel
         model.item_type = TestModel.TYPE_BUILD
+        return model
+    }
+
+    private fun getMockModel(key: String, value: String): TestModel {
+        val model = TestModel()
+        val mockModel = TestModel.MockModel(key, value)
+        model.valueColor = Color.parseColor("#222222")
+        model.mock = mockModel
+        model.item_type = TestModel.TYPE_MOCK
+        return model
+    }
+
+    private fun getRouterModel(key: String, value: String): TestModel {
+        val model = TestModel()
+        val mockModel = TestModel.RouterModel(key, value)
+        model.valueColor = Color.parseColor("#222222")
+        model.router = mockModel
+        model.item_type = TestModel.TYPE_ROUTER
         return model
     }
 }

@@ -1,5 +1,6 @@
 package com.binlly.fastpeak
 
+import com.binlly.fastpeak.base.PREFERENCE_NAME_BUILD
 import com.binlly.fastpeak.ext.DelegatesExt
 
 /**
@@ -8,12 +9,11 @@ import com.binlly.fastpeak.ext.DelegatesExt
 
 object Build {
 
-    const val PREFERENCE_BUILD = "build"
     const val KEY_ENV = "env"
 
     const val ENV_DEBUG = "env_debug"
     const val ENV_ONLINE = "env_online"
 
     val defaultEnv = if (BuildConfig.DEBUG) ENV_DEBUG else ENV_ONLINE
-    var env by DelegatesExt.preference(PREFERENCE_BUILD, KEY_ENV, defaultEnv)
+    var env by DelegatesExt.preference(PREFERENCE_NAME_BUILD, KEY_ENV, defaultEnv)
 }
