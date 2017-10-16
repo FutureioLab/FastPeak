@@ -1,9 +1,6 @@
 package com.binlly.fastpeak.business.test.adapter
 
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AlertDialog
 import android.text.SpannableStringBuilder
@@ -13,7 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.binlly.fastpeak.Build
 import com.binlly.fastpeak.R
-import com.binlly.fastpeak.business.demo.activity.DemoActivity
 import com.binlly.fastpeak.business.test.model.TestModel
 import com.binlly.fastpeak.service.Services
 import com.chad.library.adapter.base.BaseViewHolder
@@ -55,22 +51,12 @@ class EnvDelegate(context: Context): BaseDelegate(context) {
             builder.setMessage(msgBuilder.toString())
             builder.setPositiveButton("重启") { _, _ ->
                 Build.env = env.key
-                restartApp()
+                Services.app.restartApp(context)
                 dialog?.dismiss()
             }
             builder.setNegativeButton("取消") { _, _ -> dialog?.dismiss() }
             dialog = builder.create()
         }
         dialog?.show()
-    }
-
-    private fun restartApp() {
-        val mStartActivity = Intent(context, DemoActivity::class.java)
-        val mPendingIntentId = 123456
-        val mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId, mStartActivity,
-                PendingIntent.FLAG_CANCEL_CURRENT)
-        val mgr = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        mgr.set(AlarmManager.RTC, System.currentTimeMillis(), mPendingIntent)
-        Services.app.exit()
     }
 }

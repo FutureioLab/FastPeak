@@ -1,6 +1,7 @@
 package com.binlly.fastpeak.base.net
 
 import com.binlly.fastpeak.BuildConfig
+import com.binlly.fastpeak.repo.RemoteRepo
 import com.binlly.fastpeak.service.Services
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -19,7 +20,7 @@ object RetrofitManager {
 
     private val okHttpClient = createOkHttpClient()
     private var serverRetrofit = createServerRetrofit(RetrofitConfig.getBaseUrl())
-    private var mockRetrofit = createServerRetrofit("http://127.0.0.1")
+    private var mockRetrofit = createServerRetrofit(RemoteRepo.mockHost)
 
     /**
      * 创建OkHttp
@@ -53,11 +54,11 @@ object RetrofitManager {
         return builder.build()
     }
 
-    fun reCreateRetrofit(serverUrl: String) {
+    private fun reCreateRetrofit(serverUrl: String) {
         serverRetrofit = createServerRetrofit(serverUrl)
     }
 
-    fun reCreateMockRetrofit(mockHost: String) {
+    private fun reCreateMockRetrofit(mockHost: String) {
         mockRetrofit = createRetrofit(mockHost)
     }
 

@@ -5,7 +5,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.binlly.fastpeak.R
-import com.binlly.fastpeak.base.net.RetrofitManager
 import com.binlly.fastpeak.business.test.TestFragment
 import com.binlly.fastpeak.business.test.model.TestModel
 import com.binlly.fastpeak.ext.ToastUtils
@@ -42,8 +41,11 @@ class MockDelegate(context: Context, val fragment: TestFragment): BaseDelegate(c
             if (host.isNotEmpty() && (host.startsWith("https://") || host.startsWith("http://"))) {
                 item.mock.value = host.toString()
                 RemoteRepo.mockHost = host.toString()
-                RetrofitManager.reCreateMockRetrofit(host.toString())
-                ToastUtils.showToast("设置成功")
+                // RetrofitManager.reCreateMockRetrofit(host.toString())
+                ToastUtils.showToast("设置成功，即将重启")
+                Services.postDelayed(2000) {
+                    Services.app.restartApp(context)
+                }
             } else ToastUtils.showToast("地址不合法，请重新设置")
         }
 
