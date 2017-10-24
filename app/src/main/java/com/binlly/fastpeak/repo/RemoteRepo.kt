@@ -1,6 +1,6 @@
 package com.binlly.fastpeak.repo
 
-import com.binlly.fastpeak.api.RemoteService
+import com.binlly.fastpeak.repo.service.RemoteService
 import com.binlly.fastpeak.base.PREFERENCE_NAME_REMOTE_CONFIG
 import com.binlly.fastpeak.base.Preference
 import com.binlly.fastpeak.base.net.ReqParams
@@ -33,22 +33,23 @@ object RemoteRepo {
             e.printStackTrace()
         }
     }
-}
 
-class MockHostDelegate: ReadWriteProperty<Any?, String> {
-    private var host: String by Preference(Services.app, PREFERENCE_NAME_REMOTE_CONFIG,
-            RemoteRepo.PREFERENCE_KEY_HOST, "http://127.0.0.1")
+    class MockHostDelegate: ReadWriteProperty<Any?, String> {
+        private var host: String by Preference(Services.app, PREFERENCE_NAME_REMOTE_CONFIG,
+                RemoteRepo.PREFERENCE_KEY_HOST, "http://127.0.0.1")
 
-    override fun getValue(thisRef: Any?, property: KProperty<*>): String {
-        return host
-    }
+        override fun getValue(thisRef: Any?, property: KProperty<*>): String {
+            return host
+        }
 
-    override fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
-        if (host == value) return
-        host = value
-        RemoteRepo.mRetrofit = RetrofitManager.createRetrofit(host)
-        RemoteRepo.mService = RemoteRepo.mRetrofit.create(RemoteService::class.java)
-        Services.remoteConfig().pullMockConfig({}) //改变地址之后重新拉取并更新mock配置
+        override fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+            if (host == value) return
+            host = value
+            RemoteRepo.mRetrofit = RetrofitManager.createRetrofit(host)
+            RemoteRepo.mService = RemoteRepo.mRetrofit.create(
+                    RemoteService::class.java)
+            Services.remoteConfig().pullMockConfig({}) //改变地址之后重新拉取并更新mock配置
+        }
     }
 }
 

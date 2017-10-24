@@ -1,5 +1,6 @@
-package com.binlly.fastpeak.api
+package com.binlly.fastpeak.repo.service
 
+import com.binlly.fastpeak.api.ApiConfig
 import com.binlly.fastpeak.base.net.HttpResult
 import com.binlly.fastpeak.business.demo.fragment.DemoFragmentModel
 import com.binlly.fastpeak.business.demo.model.DemoModel

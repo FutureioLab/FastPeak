@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<template
+    format="5"
+    revision="5"
+    name="Repo"
+    minApi="15"
+    minBuildApi="15"
+    description="Creates a Retrofit Service and Repo">
+
+    <category value="Repo" />
+    <formfactor value="Mobile" />
+
+    <parameter
+        id="apiService"
+        name="Service Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        default="Demo"
+        help="The name of the api service to create" />
+
+    <parameter
+        id="packageName"
+        name="Package name"
+        type="string"
+        constraints="package"
+        default="com.mycompany.myapp" />
+
+    <globals file="globals.xml.ftl" />
+    <execute file="recipe.xml.ftl" />
+
+</template>

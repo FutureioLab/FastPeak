@@ -2,12 +2,12 @@ package com.binlly.fastpeak.repo
 
 
 import com.binlly.fastpeak.api.ApiConfig
-import com.binlly.fastpeak.api.DemoService
 import com.binlly.fastpeak.base.net.ReqParams
 import com.binlly.fastpeak.base.net.RetrofitManager
 import com.binlly.fastpeak.base.rx.IoTransformer
 import com.binlly.fastpeak.business.demo.fragment.DemoFragmentModel
 import com.binlly.fastpeak.business.demo.model.DemoModel
+import com.binlly.fastpeak.repo.service.DemoService
 import io.reactivex.Observer
 
 /**
@@ -18,7 +18,8 @@ object DemoRepo {
     private val TAG = DemoRepo::class.java.simpleName
 
     private val mService = RetrofitManager.create(DemoService::class.java)
-    private val mMockService = RetrofitManager.createMock(DemoService::class.java)
+    private val mMockService = RetrofitManager.createMock(
+            DemoService::class.java)
     private val mServiceProxy = DynamicProxy(mService, mMockService).getProxy<DemoService>()
 
     fun putUserCache(demo: DemoModel) {
