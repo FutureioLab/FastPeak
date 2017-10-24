@@ -23,31 +23,29 @@ class DemoActivity: BaseMvpActivity<DemoPresenter>(), DemoContract.View {
 
         val hit = if (BuildConfig.DEBUG) 2 else 5
         MultiClicker().onMultiClick(hit = hit, view = toolbar)
-        toolbar.setOnClickListener {
-            startActivity<TestActivity>()
-        }
+        toolbar.setOnClickListener { startActivity<TestActivity>() }
 
-        button_fragment.setOnClickListener {
-            startActivity<DemoFragmentActivity>()
-        }
+        button_fragment.setOnClickListener { startActivity<DemoFragmentActivity>() }
 
-        button.setOnClickListener {
-            P().requestDemo(object: RxObserver<DemoModel>(this) {
-                override fun onNext(model: DemoModel) {
-                    toast(model.toString())
-                }
+        button.setOnClickListener { refresh() }
+    }
 
-                override fun onError(e: Throwable) {
-                    super.onError(e)
-                    e.message ?: return
-                    toast(e.message.toString())
-                }
+    private fun refresh() {
+        P().requestDemo(object: RxObserver<DemoModel>(this) {
+            override fun onNext(model: DemoModel) {
+                toast(model.toString())
+            }
 
-                override fun onComplete() {
-                    super.onComplete()
-                    toast("onComplete")
-                }
-            })
-        }
+            override fun onError(e: Throwable) {
+                super.onError(e)
+                e.message ?: return
+                toast(e.message.toString())
+            }
+
+            override fun onComplete() {
+                super.onComplete()
+                toast("onComplete")
+            }
+        })
     }
 }
