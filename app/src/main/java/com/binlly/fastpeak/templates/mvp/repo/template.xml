@@ -7,7 +7,7 @@
     minBuildApi="15"
     description="Creates a Retrofit Service and Repo">
 
-    <category value="Repo" />
+    <category value="Mvp" />
     <formfactor value="Mobile" />
 
     <parameter
