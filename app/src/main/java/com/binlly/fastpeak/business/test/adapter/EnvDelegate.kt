@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.binlly.fastpeak.Build
 import com.binlly.fastpeak.R
+import com.binlly.fastpeak.base.adapter.BaseDelegate
 import com.binlly.fastpeak.business.test.model.TestModel
 import com.binlly.fastpeak.service.Services
 import com.chad.library.adapter.base.BaseViewHolder
@@ -18,7 +19,7 @@ import com.chad.library.adapter.base.BaseViewHolder
  * Created by binlly on 2017/5/13.
  */
 
-class EnvDelegate(context: Context): BaseDelegate(context) {
+class EnvDelegate(context: Context): BaseDelegate<TestModel>(context) {
 
     private var dialog: AlertDialog? = null
 

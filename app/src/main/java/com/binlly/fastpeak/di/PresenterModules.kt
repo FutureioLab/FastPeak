@@ -4,6 +4,8 @@ import com.binlly.fastpeak.business.demo.activity.DemoActivity
 import com.binlly.fastpeak.business.demo.activity.DemoPresenter
 import com.binlly.fastpeak.business.demo.fragment.DemoFragment
 import com.binlly.fastpeak.business.demo.fragment.DemoFragmentPresenter
+import com.binlly.fastpeak.business.web.WebListActivity
+import com.binlly.fastpeak.business.web.WebListPresenter
 import dagger.Module
 import dagger.Provides
 
@@ -29,5 +31,10 @@ class PresenterModules {
     @Provides
     fun provideDemoFragmentPresenter(fragment: DemoFragment): DemoFragmentPresenter {
         return DemoFragmentPresenter(fragment.context, fragment)
+    }
+
+    @Provides
+    fun provideWebListPresenter(activity: WebListActivity): WebListPresenter {
+        return WebListPresenter(activity, activity)
     }
 }

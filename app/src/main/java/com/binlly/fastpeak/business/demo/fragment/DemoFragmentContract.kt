@@ -15,5 +15,4 @@ interface DemoFragmentContract {
         fun requestDemo(observer: RxObserver<DemoModel>)
         fun requestImageList(observer: RxObserver<DemoFragmentModel>)
     }
-
 }

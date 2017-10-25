@@ -5,6 +5,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.binlly.fastpeak.R
+import com.binlly.fastpeak.base.adapter.BaseDelegate
 import com.binlly.fastpeak.business.test.TestFragment
 import com.binlly.fastpeak.business.test.model.TestModel
 import com.binlly.fastpeak.ext.ToastUtils
@@ -16,7 +17,7 @@ import com.chad.library.adapter.base.BaseViewHolder
  * Created by binlly on 2017/5/13.
  */
 
-class MockDelegate(context: Context, val fragment: TestFragment): BaseDelegate(context) {
+class MockDelegate(context: Context, val fragment: TestFragment): BaseDelegate<TestModel>(context) {
 
     override val layoutResId: Int
         get() = R.layout.test_item_key_editor

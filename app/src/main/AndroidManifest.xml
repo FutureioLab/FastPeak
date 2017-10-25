@@ -38,6 +38,9 @@
         <activity
             android:name=".business.test.TestActivity"
             android:theme="@style/PrimaryTheme"/>
+        <activity
+            android:name=".business.web.WebListActivity"
+            android:theme="@style/PrimaryTheme"/>
     </application>
 
 </manifest>
