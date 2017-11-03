@@ -26,6 +26,18 @@ object Services {
         mHandler.postDelayed(post, delayMillis)
     }
 
+    fun postDelayed(delayMillis: Long = 0L, post: () -> Unit) {
+        mHandler.postDelayed(post, delayMillis)
+    }
+
+    fun removeRunnable(post: (() -> Unit)?): Boolean {
+        post ?: return false
+        post.let {
+            mHandler.removeCallbacks(post)
+            return true
+        }
+    }
+
     private val accountService: AccountService by lazy { AccountServiceImpl.registerInstance() }
 
     private val remoteConfigService: RemoteConfigService by lazy { RemoteConfigServiceImpl.registerInstance() }

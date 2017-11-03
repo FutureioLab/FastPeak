@@ -1,4 +1,4 @@
-package com.binlly.fastpeak.base;
+package com.binlly.fastpeak.base
 
 import android.content.Context
 import kotlin.properties.ReadWriteProperty

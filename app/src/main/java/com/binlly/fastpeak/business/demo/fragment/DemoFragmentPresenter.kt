@@ -23,4 +23,8 @@ class DemoFragmentPresenter(context: Context, view: DemoFragmentContract.View):
     override fun requestDemo(observer: RxObserver<DemoModel>) {
         DemoRepo.requestDemo(observer)
     }
+
+    override fun requestImageList(observer: RxObserver<DemoFragmentModel>) {
+        DemoRepo.requestImageList(observer)
+    }
 }

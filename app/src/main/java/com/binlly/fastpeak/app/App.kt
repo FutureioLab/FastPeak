@@ -1,13 +1,18 @@
 package com.binlly.fastpeak.app
 
 import android.app.Activity
+import android.app.AlarmManager
 import android.app.Application
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.binlly.fastpeak.BuildConfig
 import com.binlly.fastpeak.base.logger.LogLevel
 import com.binlly.fastpeak.base.logger.logLevel
 import com.binlly.fastpeak.base.logger.logable
+import com.binlly.fastpeak.business.demo.activity.DemoActivity
 import com.binlly.fastpeak.di.DaggerAppComponent
 import com.binlly.fastpeak.service.Services
 import dagger.android.AndroidInjector
@@ -82,12 +87,23 @@ class App: Application(),
     override fun onActivitySaveInstanceState(activity: Activity, bundle: Bundle?) {
     }
 
-    private fun finishAllActivitys() {
+    private fun finishAllActivities() {
         activitys.forEach { it.finish() }
     }
 
     fun exit() {
-        finishAllActivitys()
+        finishAllActivities()
         System.exit(0)
+    }
+
+    fun restartApp(context: Context) {
+        val mStartActivity = Intent(context, DemoActivity::class.java)
+        val mPendingIntentId = 1234567
+        val mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId, mStartActivity,
+                PendingIntent.FLAG_CANCEL_CURRENT)
+        val am = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        am.set(AlarmManager.RTC, System.currentTimeMillis(), mPendingIntent)
+        exit()
+        android.os.Process.killProcess(android.os.Process.myPid())
     }
 }

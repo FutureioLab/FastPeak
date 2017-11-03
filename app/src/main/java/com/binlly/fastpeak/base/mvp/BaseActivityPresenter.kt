@@ -3,7 +3,7 @@ package com.binlly.fastpeak.base.mvp
 import android.content.Intent
 import android.os.Bundle
 
-interface BaseActivityPresenter {
+interface BaseActivityPresenter: BasePresenter {
     fun handleIntent(intent: Intent): Boolean
 
     fun onCreate()

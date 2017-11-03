@@ -9,6 +9,8 @@ object RetrofitConfig {
     private const val BASE_URL: String = "https://api.futureio.top/"
     private const val BASE_URL_DEBUG: String = "http://test.api.futureio.top/"
 
+    const val PREFERENCE_KEY_MOCK_HOST: String = "mock_host"
+
     fun getBaseUrl(): String {
         return if (BuildConfig.DEBUG) BASE_URL_DEBUG else BASE_URL
     }

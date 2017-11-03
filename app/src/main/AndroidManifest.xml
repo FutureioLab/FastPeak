@@ -19,7 +19,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="APIV"
             android:value="1"/>
@@ -27,22 +26,21 @@
         <activity
             android:name=".business.demo.activity.DemoActivity"
             android:theme="@style/PrimaryTheme">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
         </activity>
-
         <activity
             android:name=".business.demo.fragment.DemoFragmentActivity"
             android:theme="@style/PrimaryTheme"/>
-
         <activity
             android:name=".business.test.TestActivity"
             android:theme="@style/PrimaryTheme"/>
-
+        <activity
+            android:name=".business.web.WebListActivity"
+            android:theme="@style/PrimaryTheme"/>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.binlly.fastpeak.base.net
 
 import com.binlly.fastpeak.BuildConfig
+import com.binlly.fastpeak.repo.RemoteRepo
 import com.binlly.fastpeak.service.Services
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -19,6 +20,8 @@ object RetrofitManager {
 
     private val okHttpClient = createOkHttpClient()
     private var serverRetrofit = createServerRetrofit(RetrofitConfig.getBaseUrl())
+    private var mockRetrofit = createServerRetrofit(RemoteRepo.mockHost)
+
     /**
      * 创建OkHttp
      *
@@ -29,7 +32,8 @@ object RetrofitManager {
         val cacheFile = File(Services.app().cacheDir, "okhttp_cache")
         val cache = Cache(cacheFile, (1024 * 1024 * 100).toLong()) //100Mb缓存
         val cacheControlInterceptor = CacheControlInterceptor()
-        val builder = OkHttpClient.Builder().addInterceptor(cacheControlInterceptor).cache(cache).followRedirects(true)
+        val builder = OkHttpClient.Builder().addInterceptor(cacheControlInterceptor).cache(
+                cache).followRedirects(true)
         if (BuildConfig.DEBUG) {
             val bodyInterceptor = HttpLoggingInterceptor()
             bodyInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -50,8 +54,12 @@ object RetrofitManager {
         return builder.build()
     }
 
-    fun reCreateRetrofit(serverUrl: String) {
+    private fun reCreateRetrofit(serverUrl: String) {
         serverRetrofit = createServerRetrofit(serverUrl)
+    }
+
+    private fun reCreateMockRetrofit(mockHost: String) {
+        mockRetrofit = createRetrofit(mockHost)
     }
 
     /**
@@ -66,8 +74,10 @@ object RetrofitManager {
     /**
      * 创建retrofit实例
      */
-    private fun createRetrofit(baseUrl: String): Retrofit {
-        return Retrofit.Builder().baseUrl(baseUrl).client(okHttpClient).addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build()
+    fun createRetrofit(baseUrl: String): Retrofit {
+        return Retrofit.Builder().baseUrl(baseUrl).client(okHttpClient).addConverterFactory(
+                GsonConverterFactory.create()).addCallAdapterFactory(
+                RxJava2CallAdapterFactory.create()).build()
     }
 
     /**
@@ -79,5 +89,9 @@ object RetrofitManager {
     </T> */
     fun <T> create(clazz: Class<T>): T {
         return serverRetrofit.create(clazz)
+    }
+
+    fun <T> createMock(clazz: Class<T>): T {
+        return mockRetrofit.create(clazz)
     }
 }

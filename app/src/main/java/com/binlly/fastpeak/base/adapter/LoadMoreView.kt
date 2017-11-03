@@ -18,10 +18,10 @@ class LoadMoreView: LoadMoreView() {
     }
 
     override fun getLoadEndViewId(): Int {
-        return R.id.load_more_loading_view
+        return R.id.load_more_load_end_view
     }
 
     override fun getLoadFailViewId(): Int {
-        return R.id.load_more_load_end_view
+        return R.id.load_more_load_fail_view
     }
 }

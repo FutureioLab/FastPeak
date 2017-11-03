@@ -23,7 +23,7 @@ kotlin {
 android {
 
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.binlly.fastpeak"
@@ -61,6 +61,56 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+import org.aspectj.bridge.IMessage
+import org.aspectj.bridge.MessageHandler
+import org.aspectj.tools.ajc.Main
+
+final def log = project.logger
+final def variants = project.android.applicationVariants
+variants.all { variant ->
+    //    if (!variant.buildType.isDebuggable()) {
+    //        log.debug("Skipping non-debuggable build type '${variant.buildType.name}'.")
+    //        return;
+    //    }
+
+    JavaCompile javaCompile = variant.javaCompile
+    javaCompile.doLast {
+        String[] args = ["-showWeaveInfo",
+                         "-1.5",
+                         "-inpath", javaCompile.destinationDir.toString(),
+                         "-aspectpath", javaCompile.classpath.asPath,
+                         "-d", javaCompile.destinationDir.toString(),
+                         "-classpath", javaCompile.classpath.asPath,
+                         "-bootclasspath", project.android.bootClasspath.join(File.pathSeparator)]
+        log.debug "ajc args: " + Arrays.toString(args)
+
+        MessageHandler handler = new MessageHandler(true);
+        new Main().run(args, handler);
+        for (IMessage message : handler.getMessages(null, true)) {
+            switch (message.getKind()) {
+                case IMessage.ABORT:
+                case IMessage.ERROR:
+                case IMessage.FAIL:
+                    log.error message.message, message.thrown
+                    break;
+                case IMessage.WARNING:
+                    log.warn message.message, message.thrown
+                    break;
+                case IMessage.INFO:
+                    log.info message.message, message.thrown
+                    break;
+                case IMessage.DEBUG:
+                    log.debug message.message, message.thrown
+                    break;
+            }
+        }
+    }
 }
 
 dependencies {
@@ -82,7 +132,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.1'
 
     // bravh
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.27'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 
     // rx android
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
@@ -125,7 +175,12 @@ dependencies {
     }
     kapt "com.github.hotchemi:permissionsdispatcher-processor:2.4.0"
 
+    implementation "org.aspectj:aspectjrt:$aspectj_version"
+
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation "com.android.support.test:runner:1.0.0"
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.0'
+    testImplementation 'org.robolectric:robolectric:3.4.2'
+    testImplementation "org.mockito:mockito-core:2.6.5"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    androidTestImplementation "com.android.support.test:runner:1.0.1"
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
