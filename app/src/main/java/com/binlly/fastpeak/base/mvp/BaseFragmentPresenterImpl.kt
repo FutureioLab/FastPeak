@@ -26,10 +26,6 @@ open class BaseFragmentPresenterImpl<out V: BaseView>(val context: Context, priv
         //do something in subclass
     }
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        //do something in subclass
-    }
-
     override fun onPause() {
         //do something in subclass
     }

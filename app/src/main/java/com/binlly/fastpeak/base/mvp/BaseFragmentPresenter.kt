@@ -12,8 +12,6 @@ interface BaseFragmentPresenter: BasePresenter {
 
     fun onSaveInstanceState(outState: Bundle?)
 
-    fun setUserVisibleHint(isVisibleToUser: Boolean)
-
     fun onPause()
 
     fun onDestroy()
