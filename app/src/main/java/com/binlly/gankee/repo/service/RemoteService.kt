@@ -1,5 +1,6 @@
 package com.binlly.gankee.repo.service
 
+import com.binlly.gankee.api.ApiConfig
 import com.binlly.gankee.base.net.HttpResult
 import com.binlly.gankee.service.remoteconfig.RemoteMockModel
 import io.reactivex.Observable
@@ -13,6 +14,6 @@ import retrofit2.http.POST
 interface RemoteService {
 
     @FormUrlEncoded
-    @POST(com.binlly.gankee.api.ApiConfig.URL_CONFIG_MOCK)
+    @POST(ApiConfig.URL_CONFIG_MOCK)
     fun requestMock(@FieldMap fieldMap: Map<String, String>): Observable<HttpResult<RemoteMockModel>>
 }

@@ -1,16 +1,16 @@
 package com.binlly.gankee.repo
 
+import com.binlly.gankee.api.ApiConfig
 import com.binlly.gankee.base.net.HttpResult
+import com.binlly.gankee.business.PAGE_SIZE
 import com.binlly.gankee.business.girl.FeedGirl
 import io.reactivex.Observable
-import retrofit2.http.FieldMap
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface GirlService {
 
-    @FormUrlEncoded
-    @POST(com.binlly.gankee.api.ApiConfig.URL_FEED_GIRL)
-    @com.binlly.gankee.repo.mock.MOCK(com.binlly.gankee.api.ApiConfig.URL_FEED_GIRL)
-    fun request(@FieldMap fieldMap: Map<String, String>): Observable<HttpResult<List<FeedGirl>?>>
+    //    @FormUrlEncoded
+    @GET("${ApiConfig.URL_FEED_GIRL}$PAGE_SIZE/{page}")
+    fun requestGirls(@Path("page") page: Int): Observable<HttpResult<List<FeedGirl>>>
 }

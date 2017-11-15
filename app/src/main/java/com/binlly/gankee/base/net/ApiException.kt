@@ -12,7 +12,7 @@ import android.text.TextUtils
  *
  * Http Status Code 为 200 并且返回内容的code不为0时 抛出APIException
  */
-class ApiException(detailMessage: String): RuntimeException(detailMessage) {
+class ApiException(detailMessage: String = "未知错误"): RuntimeException(detailMessage) {
 
     var code: Int = 0
 

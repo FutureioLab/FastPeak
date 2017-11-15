@@ -6,11 +6,6 @@ package com.binlly.gankee.base.net
  * Desc:    网络请求返回
  */
 class HttpResult<T> {
-    var result: T? = null
-    var status: Status = Status()
-
-    class Status {
-        var status_code: Int = 0
-        var status_reason: String? = null
-    }
+    var results: T? = null
+    var error: Boolean = false
 }

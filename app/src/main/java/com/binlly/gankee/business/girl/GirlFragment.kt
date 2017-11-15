@@ -20,7 +20,7 @@ class GirlFragment: BaseMvpFragment<GirlPresenter>(), GirlContract.View {
 
     private fun refresh() {
         setPageLoading()
-        P.requestGirls(object: RxObserver<List<FeedGirl>?>() {
+        P.requestGirls(0, object: RxObserver<List<FeedGirl>?>() {
             override fun onNext(list: List<FeedGirl>?) {
                 setPageSucceed()
             }

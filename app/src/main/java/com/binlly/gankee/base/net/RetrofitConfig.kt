@@ -6,8 +6,8 @@ import com.binlly.gankee.BuildConfig
  * Created by yy on 2017/8/23.
  */
 object RetrofitConfig {
-    private const val BASE_URL: String = "https://api.futureio.top/"
-    private const val BASE_URL_DEBUG: String = "http://test.api.futureio.top/"
+    private const val BASE_URL: String = "http://gank.io/api/"
+    private const val BASE_URL_DEBUG: String = "http://gank.io/api/"
 
     const val PREFERENCE_KEY_MOCK_HOST: String = "mock_host"
 

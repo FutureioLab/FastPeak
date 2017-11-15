@@ -17,12 +17,18 @@ import io.reactivex.schedulers.Schedulers
  * @param <T>
  */
 class IoTransformer<T>: ObservableTransformer<HttpResult<T>, T> {
-    @Throws(ApiException::class) override fun apply(upstream: Observable<HttpResult<T>>): ObservableSource<T?> {
+    @Throws(ApiException::class) override fun apply(
+            upstream: Observable<HttpResult<T>>
+    ): ObservableSource<T?> {
         return upstream.map { httpResult ->
-            if (httpResult.status.status_code != 0) {
-                throw ApiException(httpResult.status.status_code, httpResult.status.status_reason)
+            // if (httpResult.status.status_code != 0) {
+            //     throw ApiException(httpResult.status.status_code, httpResult.status.status_reason)
+            // }
+            // httpResult.result
+            if (httpResult.error) {
+                throw ApiException()
             }
-            httpResult.result
+            httpResult.results
         }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
 }

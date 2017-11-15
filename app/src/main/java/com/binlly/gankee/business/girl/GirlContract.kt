@@ -11,6 +11,6 @@ interface GirlContract {
     }
 
     interface Presenter: BaseFragmentPresenter {
-        fun requestGirls(observer: RxObserver<List<FeedGirl>?>)
+        fun requestGirls(page: Int, observer: RxObserver<List<FeedGirl>?>)
     }
 }

@@ -1,6 +1,7 @@
 package com.binlly.gankee.repo
 
 
+import com.binlly.gankee.api.ApiConfig
 import com.binlly.gankee.base.net.ReqParams
 import com.binlly.gankee.base.net.RetrofitManager
 import com.binlly.gankee.base.rx.IoTransformer
@@ -17,12 +18,11 @@ object DemoRepo {
     private val TAG = DemoRepo::class.java.simpleName
 
     private val mService = RetrofitManager.create(DemoService::class.java)
-    private val mMockService = RetrofitManager.createMock(
-            DemoService::class.java)
+    private val mMockService = RetrofitManager.createMock(DemoService::class.java)
     private val mServiceProxy = DynamicProxy(mService, mMockService).getProxy<DemoService>()
 
     fun putUserCache(demo: DemoModel) {
-        val key = com.binlly.gankee.api.ApiConfig.URL_DEMO
+        val key = ApiConfig.URL_DEMO
         RepoCache.put(key, demo)
     }
 
