@@ -30,7 +30,7 @@
         name="Layout Name"
         type="string"
         constraints="layout|unique|nonempty"
-        suggest="${fragmentToLayout(moduleName)}"
+        suggest="fragment_${classToResource(moduleName)}"
         default="fragment_demo"
         visibility="generateLayout"
         help="The name of the layout to create for the mvp" />

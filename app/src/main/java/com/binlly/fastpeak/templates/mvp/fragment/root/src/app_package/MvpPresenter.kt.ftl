@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 
 class ${moduleName}Presenter(context: Context, mView: ${moduleName}Contract.View):
-        BaseActivityPresenterImpl<${moduleName}Contract.View>(context, mView),
+        BaseFragmentPresenterImpl<${moduleName}Contract.View>(context, mView),
         ${moduleName}Contract.Presenter {
 
     override fun handleArgument(bundle: Bundle?) {
