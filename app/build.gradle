@@ -26,7 +26,7 @@ android {
     buildToolsVersion '26.0.2'
 
     defaultConfig {
-        applicationId "com.binlly.fastpeak"
+        applicationId "com.binlly.gankee"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1

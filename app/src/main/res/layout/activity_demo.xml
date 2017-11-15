@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.binlly.fastpeak.business.demo.activity.DemoActivity">
+    tools:context="com.binlly.gankee.business.demo.activity.DemoActivity">
 
     <Button
         android:id="@+id/button"
