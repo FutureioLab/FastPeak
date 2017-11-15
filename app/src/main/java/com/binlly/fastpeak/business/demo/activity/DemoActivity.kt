@@ -23,7 +23,7 @@ class DemoActivity: BaseMvpActivity<DemoPresenter>(), DemoContract.View {
     override fun initView(savedInstanceState: Bundle?) {
 
         val hit = if (BuildConfig.DEBUG) 2 else 5
-        MultiClicker().onMultiClick(hit = hit, view = toolbar){
+        MultiClicker().onMultiClick(hit = hit, view = getToolbar()) {
             startActivity<TestActivity>()
         }
 
@@ -51,5 +51,13 @@ class DemoActivity: BaseMvpActivity<DemoPresenter>(), DemoContract.View {
                 toast("onComplete")
             }
         })
+    }
+
+    override fun isNeedToolbar(): Boolean {
+        return true
+    }
+
+    override fun customTitle(): String {
+        return "Demo"
     }
 }
