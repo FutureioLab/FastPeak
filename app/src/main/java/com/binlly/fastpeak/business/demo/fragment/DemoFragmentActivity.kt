@@ -17,4 +17,12 @@ class DemoFragmentActivity: BaseActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.content, DemoFragment()).commit()
     }
+
+    override fun isNeedToolbar(): Boolean {
+        return true
+    }
+
+    override fun customTitle(): String {
+        return "包含Fragment的Activity"
+    }
 }

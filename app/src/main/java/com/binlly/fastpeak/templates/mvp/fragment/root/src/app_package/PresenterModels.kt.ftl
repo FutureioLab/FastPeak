@@ -10,6 +10,6 @@ class PresenterModules {
     //将此处拷贝到di目录PresenterModules类下
     @Provides
     fun provide${moduleName}Presenter(fragment: ${moduleName}Fragment): ${moduleName}Presenter {
-        return ${moduleName}Presenter(fragment, fragment)
+        return ${moduleName}Presenter(fragment.context, fragment)
     }
 }

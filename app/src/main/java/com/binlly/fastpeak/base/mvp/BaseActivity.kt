@@ -3,8 +3,10 @@ package com.binlly.fastpeak.base.mvp
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import com.binlly.fastpeak.base.logger.Logger
 import com.binlly.fastpeak.base.widget.LoadingProgressDialog
+import com.binlly.gankee.base.mvp.DelegateView
 import org.greenrobot.eventbus.EventBus
 
 
@@ -15,7 +17,10 @@ abstract class BaseActivity: AppCompatActivity(), BaseView {
 
     val logger = Logger()
 
+    private lateinit var delegateView: DelegateView
+
     private val loadingDia: LoadingProgressDialog by lazy { LoadingProgressDialog(this) }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         beforeInject()
@@ -42,7 +47,15 @@ abstract class BaseActivity: AppCompatActivity(), BaseView {
 
         if (isNeedEventBus()) EventBus.getDefault().register(this)
 
-        setContentView(getContentView())
+        delegateView = DelegateView(this)
+        delegateView.addContent(getContentView())
+        if (isNeedToolbar()) {
+            delegateView.showToolbar()
+            getToolbar().title = customTitle()
+        } else {
+            delegateView.hideToolbar()
+        }
+        setContentView(delegateView)
 
         initView(savedInstanceState)
     }
@@ -85,6 +98,18 @@ abstract class BaseActivity: AppCompatActivity(), BaseView {
     }
 
     abstract fun getContentView(): Int
+
+    open fun isNeedToolbar(): Boolean {
+        return false
+    }
+
+    open fun getToolbar(): Toolbar {
+        return delegateView.getToolbar()
+    }
+
+    open fun customTitle(): String {
+        return ""
+    }
 
     /**
      * 初始化数据

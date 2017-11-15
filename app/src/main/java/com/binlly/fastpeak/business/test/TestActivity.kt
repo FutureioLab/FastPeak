@@ -21,4 +21,12 @@ class TestActivity: BaseActivity() {
         ft.replace(R.id.contentContainer, testFragment, "test_for_tool_mode")
         ft.commitAllowingStateLoss()
     }
+
+    override fun isNeedToolbar(): Boolean {
+        return true
+    }
+
+    override fun customTitle(): String {
+        return getString(R.string.test_title)
+    }
 }

@@ -5,7 +5,7 @@ import android.os.Bundle
 import ${applicationPackage}.R
 </#if>
 
-class ${moduleName}Fragment: BaseMvpFragment<${moduleName}Presenter>() {
+class ${moduleName}Fragment: BaseMvpFragment<${moduleName}Presenter>(), ${moduleName}Contract.View {
     override fun getContentViewId(): Int {
         return R.layout.${layoutName}
     }
