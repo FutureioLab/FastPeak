@@ -52,11 +52,6 @@ abstract class BaseMvpFragment<P: BaseFragmentPresenter>: BaseFragment(),
         P.onSaveInstanceState(outState)
     }
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        P.setUserVisibleHint(isVisibleToUser)
-    }
-
     override fun onPause() {
         super.onPause()
         P.onPause()

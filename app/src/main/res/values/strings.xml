@@ -3,5 +3,7 @@
 
     <!-- test -->
     <string name="test_title">工程模式</string>
+    <string name="home_fragment_title">HomeFragment</string>
+    <string name="girl_fragment_title">GirlFragment</string>
 
 </resources>

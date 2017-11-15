@@ -7,6 +7,8 @@ object ApiConfig {
     const val URL_DEMO: String = "demo"
     const val URL_IMAGE_LIST: String = "image_list"
 
-
     const val URL_CONFIG_MOCK: String = "config/mock"
+
+    const val URL_HOME_FEED_ALL: String = "data/all/"
+    const val URL_FEED_GIRL: String = "data/福利/"
 }

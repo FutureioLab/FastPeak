@@ -3,6 +3,8 @@ package com.binlly.gankee.di
 import com.binlly.gankee.business.demo.activity.DemoActivity
 import com.binlly.gankee.business.demo.fragment.DemoFragment
 import com.binlly.gankee.business.demo.fragment.DemoFragmentActivity
+import com.binlly.gankee.business.girl.GirlFragment
+import com.binlly.gankee.business.home.HomeFragment
 import com.binlly.gankee.business.web.WebListActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -27,4 +29,12 @@ import dagger.android.ContributesAndroidInjector
     @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(
             PresenterModules::class)) abstract fun contributeWebListActivityInjector(): WebListActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(
+            PresenterModules::class)) abstract fun contributeHomeFragmentInjector(): HomeFragment
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(
+            PresenterModules::class)) abstract fun contributeGirlFragmentInjector(): GirlFragment
 }
