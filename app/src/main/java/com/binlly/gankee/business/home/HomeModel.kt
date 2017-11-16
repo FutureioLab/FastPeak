@@ -1,6 +1,9 @@
 package com.binlly.gankee.business.home
 
 import com.binlly.gankee.base.model.IModel
+import com.binlly.gankee.business.home.adapter.HomeAdapter.Companion.TYPE_GIRL
+import com.binlly.gankee.business.home.adapter.HomeAdapter.Companion.TYPE_OTHER
+import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.google.gson.annotations.SerializedName
 
 
@@ -13,5 +16,11 @@ data class FeedAll(
         @SerializedName("type") val type: String?, //Android
         @SerializedName("url") val url: String?, //http://www.jianshu.com/p/1f10d5477566
         @SerializedName("used") val used: Boolean?, //true
-        @SerializedName("who") val who: String?
-): IModel
+        @SerializedName("who") val who: String?, //
+        @SerializedName("images") val images: List<String>?
+): MultiItemEntity, IModel {
+
+    override fun getItemType(): Int {
+        return if (type.equals("福利")) TYPE_GIRL else TYPE_OTHER
+    }
+}

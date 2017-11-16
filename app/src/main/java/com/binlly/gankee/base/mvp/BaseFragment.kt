@@ -32,8 +32,9 @@ abstract class BaseFragment: Fragment(), BaseView {
         handleArguments(arguments)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+            inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
         loadingPage = object: LoadingPage(context) {
             override fun createLoadingView(): View {
                 return this@BaseFragment.loadingView
@@ -148,7 +149,7 @@ abstract class BaseFragment: Fragment(), BaseView {
         loadingPage.setError()
     }
 
-    fun setPageSucceed() {
+    fun setPageSuccess() {
         loadingPage.setSucceed()
     }
 

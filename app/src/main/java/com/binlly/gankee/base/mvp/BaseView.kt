@@ -11,4 +11,10 @@ interface BaseView {
     fun showLoading(info: String?)
 
     fun hideLoading()
+
+    //    fun setPageSuccess()
+    //
+    //    fun setPageError()
+    //
+    //    fun setPageEmpty()
 }

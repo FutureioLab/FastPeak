@@ -29,7 +29,7 @@ class DemoFragment: BaseMvpFragment<DemoFragmentPresenter>(), DemoFragmentContra
 
     override fun initView() {
         //        setPageEmpty()
-        setPageSucceed()
+        setPageSuccess()
 
         images = arrayListOf("http://www.sogoupc.com/uploads/allimg/120309/1-1203091U601.jpg",
                 "http://pic4.bbzhi.com/fengjingbizhi/gaoqingkuanpingfengjingbizhixiazai/gaoqingkuanpingfengjingbizhixiazai_404987_10.jpg",
@@ -70,7 +70,7 @@ class DemoFragment: BaseMvpFragment<DemoFragmentPresenter>(), DemoFragmentContra
         setPageLoading()
         P.requestDemo(object: RxObserver<DemoModel>() {
             override fun onNext(model: DemoModel) {
-                setPageSucceed()
+                setPageSuccess()
                 context.toast(model.toString())
             }
 

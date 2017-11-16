@@ -40,7 +40,7 @@ class TestFragment: BaseFragment() {
         recycler.adapter = mAdapter
 
         mAdapter.setNewData(testData)
-        setPageSucceed()
+        setPageSuccess()
     }
 
     fun refresh() {

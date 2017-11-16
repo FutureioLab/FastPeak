@@ -5,7 +5,10 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="PrimaryTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <style name="PrimaryTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="textColor">@color/textColor</item>
+        <item name="textColorGray">@color/textColorGray</item>
+    </style>
 
 
     <style name="Toolbar" parent="ThemeOverlay.AppCompat.ActionBar"/>
