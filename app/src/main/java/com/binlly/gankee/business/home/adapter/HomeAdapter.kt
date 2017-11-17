@@ -12,10 +12,12 @@ class HomeAdapter: MultipleItemAdapter<FeedAll>(null) {
     companion object {
         val TYPE_GIRL = 1
         val TYPE_OTHER = 2
+
+        val ACTION_TO_WEB = 3
     }
 
     init {
         addItemViewDelegate(TYPE_GIRL, GirlDelegate())
-        addItemViewDelegate(TYPE_OTHER, OtherDelegate())
+        addItemViewDelegate(TYPE_OTHER, OtherDelegate(this))
     }
 }

@@ -6,9 +6,7 @@ import android.os.Bundle
 open class BaseFragmentPresenterImpl<out V: BaseView>(val context: Context, private val mView: V):
         BaseFragmentPresenter {
 
-    fun V(): V {
-        return mView
-    }
+    fun V(): V = mView
 
     override fun handleArgument(bundle: Bundle?) {
         //do something in subclass

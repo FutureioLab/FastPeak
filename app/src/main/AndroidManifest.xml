@@ -34,6 +34,9 @@
         </activity>
 
         <activity
+            android:name=".business.web.WebActivity"
+            android:theme="@style/PrimaryTheme"/>
+        <activity
             android:name=".business.test.TestActivity"
             android:theme="@style/PrimaryTheme"/>
 

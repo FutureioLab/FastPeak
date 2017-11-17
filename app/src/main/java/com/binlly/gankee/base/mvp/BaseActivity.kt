@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import com.binlly.gankee.base.logger.Logger
 import com.binlly.gankee.base.widget.LoadingProgressDialog
-import com.binlly.gankee.base.mvp.DelegateView
 import org.greenrobot.eventbus.EventBus
 
 
@@ -60,9 +59,7 @@ abstract class BaseActivity: AppCompatActivity(), BaseView {
         initView(savedInstanceState)
     }
 
-    open fun handleIntent(intent: Intent): Boolean {
-        return true
-    }
+    open fun handleIntent(intent: Intent): Boolean = true
 
     /**
      * 在注入之前做一些初始化，比如从intent解析注入依赖的数据
@@ -78,18 +75,14 @@ abstract class BaseActivity: AppCompatActivity(), BaseView {
      *
      * @return
      */
-    open fun isInstallerLaunchAndNeedFinish(): Boolean {
-        return false
-    }
+    open fun isInstallerLaunchAndNeedFinish(): Boolean = false
 
     /**
      * 是否需要注册EventBus
      *
      * @return
      */
-    open fun isNeedEventBus(): Boolean {
-        return false
-    }
+    open fun isNeedEventBus(): Boolean = false
 
     override fun onDestroy() {
         loadingDia.dismiss()
@@ -99,17 +92,11 @@ abstract class BaseActivity: AppCompatActivity(), BaseView {
 
     abstract fun getContentView(): Int
 
-    open fun isNeedToolbar(): Boolean {
-        return false
-    }
+    open fun isNeedToolbar(): Boolean = false
 
-    open fun getToolbar(): Toolbar {
-        return delegateView.getToolbar()
-    }
+    open fun getToolbar(): Toolbar = delegateView.getToolbar()
 
-    open fun customTitle(): String {
-        return ""
-    }
+    open fun customTitle(): String = ""
 
     /**
      * 初始化数据

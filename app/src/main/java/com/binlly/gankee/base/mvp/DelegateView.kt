@@ -33,9 +33,7 @@ class DelegateView @JvmOverloads constructor(
         content.addView(contentView, FrameLayout.LayoutParams(-1, -1))
     }
 
-    fun getToolbar(): Toolbar {
-        return toolbar
-    }
+    fun getToolbar(): Toolbar = toolbar
 
     fun hideToolbar() {
         toolbar.visibility = View.GONE
@@ -45,7 +43,5 @@ class DelegateView @JvmOverloads constructor(
         toolbar.visibility = View.VISIBLE
     }
 
-    fun getContentView(): View {
-        return content
-    }
+    fun getContentView(): View = content
 }

@@ -24,21 +24,13 @@ abstract class BaseMvpActivity<P: BaseActivityPresenter>: BaseActivity(),
 
     @Inject lateinit var P: P
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        return supportFragmentInjector
-    }
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> = supportFragmentInjector
 
-    override fun fragmentInjector(): AndroidInjector<android.app.Fragment> {
-        return frameworkFragmentInjector
-    }
+    override fun fragmentInjector(): AndroidInjector<android.app.Fragment> = frameworkFragmentInjector
 
-    override fun P(): P {
-        return P
-    }
+    override fun P(): P = P
 
-    override fun handleIntent(intent: Intent): Boolean {
-        return P.handleIntent(intent)
-    }
+    override fun handleIntent(intent: Intent): Boolean = P.handleIntent(intent)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)

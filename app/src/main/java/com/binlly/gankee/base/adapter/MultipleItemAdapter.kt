@@ -1,11 +1,8 @@
 package com.fangxin.assessment.base.adapter
 
 import android.os.Bundle
-import android.support.annotation.LayoutRes
 import android.support.v4.util.SparseArrayCompat
 import android.view.ViewGroup
-import com.binlly.gankee.base.adapter.MessageHandler
-
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.chad.library.adapter.base.entity.MultiItemEntity
@@ -15,9 +12,10 @@ import com.chad.library.adapter.base.entity.MultiItemEntity
  */
 
 open class MultipleItemAdapter<T: MultiItemEntity>(
-        data: List<T>?): BaseMultiItemQuickAdapter<T, BaseViewHolder>(data) {
+        data: List<T>?
+): BaseMultiItemQuickAdapter<T, BaseViewHolder>(data) {
 
-    private var mMessageHandler: MessageHandler<T>? = null
+    private var handler: ((action: Int, position: Int, item: T?, args: Bundle?) -> Unit)? = null
 
     private val delegates = SparseArrayCompat<ItemViewDelegate<T, out BaseViewHolder>>()
 
@@ -35,13 +33,13 @@ open class MultipleItemAdapter<T: MultiItemEntity>(
         }
     }
 
-    fun <V: BaseViewHolder> addItemViewDelegate(viewType: Int,
-                                                itemViewDelegate: ItemViewDelegate<T, V>) {
+    fun <V: BaseViewHolder> addItemViewDelegate(
+            viewType: Int, itemViewDelegate: ItemViewDelegate<T, V>
+    ) {
         addItemType(viewType, itemViewDelegate.getItemViewLayoutId())
         if (delegates.get(viewType) != null) {
-            throw IllegalArgumentException(
-                    "An ItemViewDelegate is already registered for the viewType = " + viewType + ". Already registered ItemViewDelegate is " + delegates.get(
-                            viewType))
+            throw IllegalArgumentException("An ItemViewDelegate is already registered for the viewType = $viewType. Already registered ItemViewDelegate is " + delegates.get(
+                    viewType))
         }
         delegates.put(viewType, itemViewDelegate)
     }
@@ -49,17 +47,12 @@ open class MultipleItemAdapter<T: MultiItemEntity>(
     override fun onCreateDefViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         var holder: BaseViewHolder? = null
         if (delegates.size() > 0) {
-            val delegate = delegates.get(viewType) ?: throw IllegalArgumentException(
-                    "No ItemViewDelegateManager added that matches in data source")
+            val delegate = delegates.get(viewType) ?: throw IllegalArgumentException("No ItemViewDelegateManager added that matches in data source")
 
             val view = mLayoutInflater.inflate(delegate.getItemViewLayoutId(), parent, false)
             holder = delegate.onCreateDefViewHolder(view)
         }
         return if (holder == null) super.onCreateDefViewHolder(parent, viewType) else holder
-    }
-
-    override fun addItemType(type: Int, @LayoutRes layoutResId: Int) {
-        super.addItemType(type, layoutResId)
     }
 
     private fun <V: BaseViewHolder> convert(holder: V, item: T, itemViewType: Int) {
@@ -69,8 +62,8 @@ open class MultipleItemAdapter<T: MultiItemEntity>(
         delegate.convert(holder, item)
     }
 
-    fun setMessageHandler(handler: MessageHandler<T>) {
-        mMessageHandler = handler
+    fun setMessageHandler(handler: ((action: Int, position: Int, item: T?, args: Bundle?) -> Unit)?) {
+        this.handler = handler
     }
 
     fun sendEmptyMessage(action: Int) {
@@ -79,6 +72,6 @@ open class MultipleItemAdapter<T: MultiItemEntity>(
 
     @JvmOverloads
     fun sendMessage(action: Int, position: Int, item: T?, args: Bundle? = null) {
-        mMessageHandler?.handlerMessage(action, position, item, args)
+        handler?.invoke(action, position, item, args)
     }
 }

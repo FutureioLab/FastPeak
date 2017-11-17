@@ -8,13 +8,9 @@ abstract class BaseActivityPresenterImpl<out V: BaseView>(val context: Context,
                                                           private val mView: V):
         BaseActivityPresenter {
 
-    fun V(): V {
-        return this.mView
-    }
+    fun V(): V = this.mView
 
-    override fun handleIntent(intent: Intent): Boolean {
-        return true
-    }
+    override fun handleIntent(intent: Intent): Boolean = true
 
     override fun onCreate() {
         //do nothing

@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import com.binlly.gankee.R
 import com.binlly.gankee.business.home.FeedAll
+import com.binlly.gankee.business.home.adapter.HomeAdapter.Companion.ACTION_TO_WEB
 import com.binlly.gankee.ext.dp2px
 import com.binlly.gankee.ext.load
 import com.chad.library.adapter.base.BaseViewHolder
@@ -12,7 +13,7 @@ import com.fangxin.assessment.base.adapter.ItemViewDelegate
 /**
  * Created by yy on 2017/11/16.
  */
-class OtherDelegate: ItemViewDelegate<FeedAll, BaseViewHolder> {
+class OtherDelegate(val adapter: HomeAdapter): ItemViewDelegate<FeedAll, BaseViewHolder> {
 
     override fun getItemViewLayoutId(): Int = R.layout.item_home_other
 
@@ -35,6 +36,11 @@ class OtherDelegate: ItemViewDelegate<FeedAll, BaseViewHolder> {
             val w = 80
             val url = "${item.images[0]}?imageView2/0/w/${w.dp2px()}" //请求小图
             image.load(url)
+        }
+
+        holder.itemView.setOnClickListener {
+            val position = holder.adapterPosition
+            adapter.sendMessage(ACTION_TO_WEB, position, adapter.getItem(position))
         }
     }
 }

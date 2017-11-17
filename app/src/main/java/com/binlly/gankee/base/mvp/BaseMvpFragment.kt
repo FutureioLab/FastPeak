@@ -25,13 +25,9 @@ abstract class BaseMvpFragment<P: BaseFragmentPresenter>: BaseFragment(),
         super.onAttach(context)
     }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        return childFragmentInjector
-    }
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> = childFragmentInjector
 
-    override fun P(): P {
-        return P
-    }
+    override fun P(): P = P
 
     override fun handleArguments(arg: Bundle?) {
         P.handleArgument(arg)

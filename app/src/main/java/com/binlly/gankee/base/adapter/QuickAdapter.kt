@@ -1,8 +1,6 @@
 package com.fangxin.assessment.base.adapter
 
 import android.os.Bundle
-import com.binlly.gankee.base.adapter.MessageHandler
-
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 
@@ -11,7 +9,7 @@ import com.chad.library.adapter.base.BaseViewHolder
  */
 
 abstract class QuickAdapter<T, K: BaseViewHolder>: BaseQuickAdapter<T, K> {
-    private var mMessageHandler: MessageHandler<T>? = null
+    private var handler: ((action: Int, position: Int, item: T?, args: Bundle?) -> Unit)? = null
 
     constructor(layoutResId: Int, data: List<T>): super(layoutResId, data) {
         init()
@@ -29,8 +27,8 @@ abstract class QuickAdapter<T, K: BaseViewHolder>: BaseQuickAdapter<T, K> {
         setLoadMoreView(LoadMoreView())
     }
 
-    fun setMessageHandler(handler: MessageHandler<T>) {
-        mMessageHandler = handler
+    fun setMessageHandler(handler: ((action: Int, position: Int, item: T?, args: Bundle?) -> Unit)?) {
+        this.handler = handler
     }
 
     fun sendEmptyMessage(action: Int) {
@@ -39,6 +37,6 @@ abstract class QuickAdapter<T, K: BaseViewHolder>: BaseQuickAdapter<T, K> {
 
     @JvmOverloads
     fun sendMessage(action: Int, position: Int, item: T?, args: Bundle? = null) {
-        mMessageHandler?.handlerMessage(action, position, item, args)
+        handler?.invoke(action, position, item, args)
     }
 }
