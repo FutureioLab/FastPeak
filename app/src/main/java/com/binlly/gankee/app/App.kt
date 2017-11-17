@@ -12,7 +12,7 @@ import com.binlly.gankee.BuildConfig
 import com.binlly.gankee.base.logger.LogLevel
 import com.binlly.gankee.base.logger.logLevel
 import com.binlly.gankee.base.logger.logable
-import com.binlly.gankee.business.demo.activity.DemoActivity
+import com.binlly.gankee.business.home.HomeActivity
 import com.binlly.gankee.di.DaggerAppComponent
 import com.binlly.gankee.service.Services
 import dagger.android.AndroidInjector
@@ -25,10 +25,8 @@ import javax.inject.Inject
 /**
  * Created by yy on 2017/8/23.
  */
-class App: Application(),
-        HasActivityInjector,
-        HasSupportFragmentInjector,
-        Application.ActivityLifecycleCallbacks {
+class App: Application(), HasActivityInjector, HasSupportFragmentInjector,
+           Application.ActivityLifecycleCallbacks {
 
     @Inject lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
     @Inject lateinit var dispatchingFragmentInjector: DispatchingAndroidInjector<Fragment>
@@ -97,9 +95,11 @@ class App: Application(),
     }
 
     fun restartApp(context: Context) {
-        val mStartActivity = Intent(context, DemoActivity::class.java)
+        val mStartActivity = Intent(context, HomeActivity::class.java)
         val mPendingIntentId = 1234567
-        val mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId, mStartActivity,
+        val mPendingIntent = PendingIntent.getActivity(context,
+                mPendingIntentId,
+                mStartActivity,
                 PendingIntent.FLAG_CANCEL_CURRENT)
         val am = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         am.set(AlarmManager.RTC, System.currentTimeMillis(), mPendingIntent)
