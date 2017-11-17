@@ -5,17 +5,16 @@ import okhttp3.ResponseBody
 import okio.*
 import java.io.IOException
 
-class ProgressResponseBody(private val imageUrl: String, private val responseBody: ResponseBody?,
-                           private val progressListener: OnProgressListener): ResponseBody() {
+class ProgressResponseBody(
+        private val imageUrl: String,
+        private val responseBody: ResponseBody?,
+        private val progressListener: OnProgressListener
+): ResponseBody() {
     private var bufferedSource: BufferedSource? = null
 
-    override fun contentType(): MediaType? {
-        return responseBody?.contentType()
-    }
+    override fun contentType(): MediaType? = responseBody?.contentType()
 
-    override fun contentLength(): Long {
-        return responseBody?.contentLength() ?: 0
-    }
+    override fun contentLength(): Long = responseBody?.contentLength() ?: 0
 
     override fun source(): BufferedSource? {
         responseBody?.let {
@@ -32,8 +31,11 @@ class ProgressResponseBody(private val imageUrl: String, private val responseBod
                 val bytesRead = super.read(sink, byteCount)
                 totalBytesRead += if (bytesRead == -1L) 0 else bytesRead
 
-                progressListener.onProgress(imageUrl, totalBytesRead, contentLength(),
-                        bytesRead == -1L, null)
+                progressListener.onProgress(imageUrl,
+                        totalBytesRead,
+                        contentLength(),
+                        bytesRead == -1L,
+                        null)
                 return bytesRead
             }
         }

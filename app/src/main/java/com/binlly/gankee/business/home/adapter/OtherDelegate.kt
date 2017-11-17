@@ -14,18 +14,19 @@ import com.fangxin.assessment.base.adapter.ItemViewDelegate
  */
 class OtherDelegate: ItemViewDelegate<FeedAll, BaseViewHolder> {
 
-    override fun getItemViewLayoutId(): Int {
-        return R.layout.item_home_other
-    }
+    override fun getItemViewLayoutId(): Int = R.layout.item_home_other
 
-    override fun onCreateDefViewHolder(view: View): BaseViewHolder? {
-        return null
-    }
+    override fun onCreateDefViewHolder(view: View): BaseViewHolder? = null
 
     override fun convert(holder: BaseViewHolder, item: FeedAll) {
         holder.setText(R.id.text_name, item.desc)
-        holder.setText(R.id.text_date, item.createdAt)
         holder.setText(R.id.text_type, item.type)
+        holder.setText(R.id.text_date, "")
+        item.createdAt?.let {
+            val pattern = """\d{4}.\d{1,2}.\d{1,2}"""
+            val list = Regex(pattern).findAll(item.createdAt).toList().flatMap(MatchResult::groupValues)
+            holder.setText(R.id.text_date, list[0])
+        }
         val image = holder.getView<ImageView>(R.id.image_cover)
         if (item.images == null || item.images.isEmpty()) {
             image.visibility = View.GONE

@@ -9,15 +9,15 @@ class HomePresenter(
         context: Context, mView: HomeContract.View
 ): BaseFragmentPresenterImpl<HomeContract.View>(context, mView), HomeContract.Presenter {
 
-    private var page = 0
+    private var page = 1
 
     override fun requestFeedAll(page: Int, observer: RxObserver<List<FeedAll>?>) {
         HomeRepo.requestFeedAll(page, observer)
     }
 
     fun refresh() {
-        page = 0
-        requestFeedAll(0, object: RxObserver<List<FeedAll>?>() {
+        page = 1
+        requestFeedAll(1, object: RxObserver<List<FeedAll>?>() {
             override fun onNext(list: List<FeedAll>?) {
                 if (list == null || list.isEmpty()) {
                     V().setPageEmpty()

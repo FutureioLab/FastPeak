@@ -27,7 +27,7 @@ android {
 
     defaultConfig {
         applicationId "com.binlly.gankee"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"

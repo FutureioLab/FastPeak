@@ -8,7 +8,4 @@ import com.google.gson.Gson
 
 private val gson by lazy { Gson() }
 
-fun Any.toJson(): String {
-    return gson.toJson(this)
-}
-
+fun Any.toJson(): String = gson.toJson(this)

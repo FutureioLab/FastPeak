@@ -11,9 +11,7 @@ import kotlinx.android.synthetic.main.activity_home.*
  */
 class HomeActivity: BaseActivity() {
 
-    override fun getContentView(): Int {
-        return R.layout.activity_home
-    }
+    override fun getContentView(): Int = R.layout.activity_home
 
     override fun initView(savedInstanceState: Bundle?) {
 
@@ -37,7 +35,7 @@ class HomeActivity: BaseActivity() {
 
             override fun onTabSelected(tab: TabLayout.Tab) {
                 d("onTabSelected ${tab.text.toString()}")
-                pager.currentItem = tab.position
+                pager.setCurrentItem(tab.position, false)
             }
 
         })
@@ -47,11 +45,7 @@ class HomeActivity: BaseActivity() {
         pager.currentItem = 0
     }
 
-    override fun isNeedToolbar(): Boolean {
-        return true
-    }
+    override fun isNeedToolbar(): Boolean = true
 
-    override fun customTitle(): String {
-        return "首页"
-    }
+    override fun customTitle(): String = "首页"
 }

@@ -1,11 +1,11 @@
 package com.binlly.gankee.business.home
 
-import android.graphics.Color
 import android.support.v7.widget.LinearLayoutManager
 import com.binlly.gankee.R
 import com.binlly.gankee.base.mvp.BaseMvpFragment
 import com.binlly.gankee.base.widget.divider.divider.HorizontalDividerItemDecoration
 import com.binlly.gankee.business.home.adapter.HomeAdapter
+import com.binlly.gankee.ext.getColor
 import com.chad.library.adapter.base.BaseQuickAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -14,9 +14,7 @@ class HomeFragment: BaseMvpFragment<HomePresenter>(), HomeContract.View,
 
     private lateinit var adapter: HomeAdapter
 
-    override fun getContentViewId(): Int {
-        return R.layout.fragment_home
-    }
+    override fun getContentViewId(): Int = R.layout.fragment_home
 
     override fun initView() {
         adapter = HomeAdapter()
@@ -24,7 +22,7 @@ class HomeFragment: BaseMvpFragment<HomePresenter>(), HomeContract.View,
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = adapter
         recycler.addItemDecoration(HorizontalDividerItemDecoration.Builder(context).size(1).color(
-                Color.rgb(0xe8, 0xe8, 0xe8)).build())
+                getColor(R.color.divider_color)).build())
 
         swipe.setOnRefreshListener {
             P.refresh()
