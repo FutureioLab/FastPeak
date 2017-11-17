@@ -11,7 +11,7 @@ import ${applicationPackage}.R
 import kotlinx.android.synthetic.main.${layoutName}.*
 
 
-class ${moduleName}Activity: BaseMvpActivity<${moduleName}Presenter>(), ${moduleName}Contract.View {
+class ${moduleName}Fragment: BaseMvpFragment<${moduleName}Presenter>(), ${moduleName}Contract.View {
 
     private lateinit var adapter: ${moduleName}Adapter
 
@@ -20,12 +20,12 @@ class ${moduleName}Activity: BaseMvpActivity<${moduleName}Presenter>(), ${module
 </#if>
 
     override fun initView(savedInstanceState: Bundle?) {
-        recycler.layoutManager = LinearLayoutManager(this)
-        adapter = ${moduleName}Adapter(this)
+        recycler.layoutManager = LinearLayoutManager(context)
+        adapter = ${moduleName}Adapter(context)
         adapter.setEnableLoadMore(true)
         adapter.setOnLoadMoreListener({ P.loadMore() }, recycler)
         recycler.adapter = adapter
-        recycler.addItemDecoration(HorizontalDividerItemDecoration.Builder(this).size(1).color(
+        recycler.addItemDecoration(HorizontalDividerItemDecoration.Builder(context).size(1).color(
         getColorExt(R.color.divider_color)).build())
 
         swipe.setOnRefreshListener {

@@ -23,7 +23,7 @@ class ${moduleName}Fragment: BaseMvpFragment<${moduleName}Presenter>(), ${module
         setPageLoading()
         P.request(object: RxObserver<${moduleName}Model>() {
             override fun onNext(model: ${moduleName}Model) {
-                setPageSuccess()
+                setPageSucceed()
             }
 
             override fun onError(e: Throwable) {

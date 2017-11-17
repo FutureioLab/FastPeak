@@ -6,7 +6,7 @@ interface ${moduleName}Contract {
 
     }
 
-    interface Presenter: BaseActivityPresenter {
+    interface Presenter: BaseFragmentPresenter {
         fun refresh()
 
         fun loadMore()
