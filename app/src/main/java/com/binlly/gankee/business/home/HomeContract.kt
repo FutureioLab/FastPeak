@@ -12,5 +12,7 @@ interface HomeContract {
 
     interface Presenter: BaseFragmentPresenter {
         fun requestFeedAll(page: Int, observer: RxObserver<List<FeedAll>?>)
+        fun refresh()
+        fun loadmore()
     }
 }

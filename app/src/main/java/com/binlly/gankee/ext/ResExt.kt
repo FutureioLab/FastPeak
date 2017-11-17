@@ -16,8 +16,8 @@ fun View.getColor(colorResId: Int): Int = getColor(resources, colorResId)
 
 fun View.getString(colorResId: Int): String = getString(resources, colorResId)
 
-fun Activity.getColor(colorResId: Int): Int = getColor(resources, colorResId)
-fun Activity.getString(colorResId: Int): String = getString(resources, colorResId)
+fun Activity.getColorExt(colorResId: Int): Int = getColor(resources, colorResId)
+fun Activity.getStringExt(colorResId: Int): String = getString(resources, colorResId)
 
 fun Fragment.getColor(colorResId: Int): Int = getColor(resources, colorResId)
 fun Fragment.getString(colorResId: Int): String = getString(resources, colorResId)

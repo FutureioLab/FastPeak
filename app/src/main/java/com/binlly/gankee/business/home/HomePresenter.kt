@@ -15,7 +15,7 @@ class HomePresenter(
         HomeRepo.requestFeedAll(page, observer)
     }
 
-    fun refresh() {
+    override fun refresh() {
         page = 1
         requestFeedAll(1, object: RxObserver<List<FeedAll>?>() {
             override fun onNext(list: List<FeedAll>?) {
@@ -34,7 +34,7 @@ class HomePresenter(
         })
     }
 
-    fun loadmore() {
+    override fun loadmore() {
         ++page
         requestFeedAll(page, object: RxObserver<List<FeedAll>?>() {
             override fun onNext(list: List<FeedAll>?) {
