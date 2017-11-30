@@ -13,6 +13,8 @@ import com.fangxin.assessment.base.adapter.QuickAdapter
 
 class GirlAdapter: QuickAdapter<FeedGirl, BaseViewHolder>(R.layout.item_home_girl) {
 
+    private var carePos = -1
+
     companion object {
         val ACTION_TO_PREVIEW = 1
     }

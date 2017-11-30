@@ -16,9 +16,7 @@ class PhotoPagerAdapter(val activity: PhotoViewActivity, val list: List<String>)
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val photoView = PhotoView(container.context)
-        container.layoutParams.width = -1
-        container.layoutParams.height = -1
-        container.addView(photoView, container.layoutParams)
+        container.addView(photoView)
         photoView.setOnPhotoTapListener { view, x, y -> activity.onBackPressed() }
         //如果图片没有加载出来 onViewTap 不会调用,但会调用此处
         photoView.setOnClickListener { activity.onBackPressed() }
