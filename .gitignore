@@ -34,6 +34,11 @@ captures/
 
 # Intellij
 *.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/dictionaries
+.idea/libraries
 
 # Keystore files
 *.jks
@@ -51,7 +56,3 @@ freeline_project_description.json
 
 .DS_Store
 /captures
-/gradlew
-/gradlew.bat
-/.idea/
-gradle/
