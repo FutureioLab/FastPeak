@@ -13,7 +13,7 @@ class HomeAdapter: MultipleItemAdapter<FeedAll>(null) {
         val TYPE_GIRL = 1
         val TYPE_OTHER = 2
 
-        val ACTION_TO_WEB = 3
+        val ACTION_TO_WEB = 1
     }
 
     init {

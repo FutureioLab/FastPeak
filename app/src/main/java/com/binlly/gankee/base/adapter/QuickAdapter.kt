@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.BaseViewHolder
  */
 
 abstract class QuickAdapter<T, K: BaseViewHolder>: BaseQuickAdapter<T, K> {
-    private var handler: ((action: Int, position: Int, item: T?, args: Bundle?) -> Unit)? = null
+    private var handler: ((action: Int, position: Int, item: T?, args: Bundle?, obj: Any?) -> Unit)? = null
 
     constructor(layoutResId: Int, data: List<T>): super(layoutResId, data) {
         init()
@@ -27,16 +27,18 @@ abstract class QuickAdapter<T, K: BaseViewHolder>: BaseQuickAdapter<T, K> {
         setLoadMoreView(LoadMoreView())
     }
 
-    fun setMessageHandler(handler: ((action: Int, position: Int, item: T?, args: Bundle?) -> Unit)?) {
+    fun setMessageHandler(
+            handler: ((action: Int, position: Int, item: T?, args: Bundle?, obj: Any?) -> Unit)?
+    ) {
         this.handler = handler
     }
 
     fun sendEmptyMessage(action: Int) {
-        sendMessage(action, -1, null, null)
+        sendMessage(action, -1, null, null, null)
     }
 
     @JvmOverloads
-    fun sendMessage(action: Int, position: Int, item: T?, args: Bundle? = null) {
-        handler?.invoke(action, position, item, args)
+    fun sendMessage(action: Int, position: Int, item: T?, args: Bundle? = null, obj: Any?) {
+        handler?.invoke(action, position, item, args, obj)
     }
 }

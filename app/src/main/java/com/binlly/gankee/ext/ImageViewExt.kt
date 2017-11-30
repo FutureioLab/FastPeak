@@ -5,9 +5,11 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.ImageView
 import com.binlly.gankee.R
+import com.binlly.gankee.base.glide.DisplayUtil
 import com.binlly.gankee.base.glide.progress.OnGlideImageViewListener
 import com.binlly.gankee.base.glide.progress.OnProgressListener
 import com.binlly.gankee.base.glide.progress.ProgressManager
+import com.binlly.gankee.service.Services
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.DataSource
@@ -23,6 +25,9 @@ import com.bumptech.glide.request.target.Target
  */
 
 private val mMainHandler = Handler(Looper.getMainLooper())
+
+private val screenHeight = DisplayUtil.getScreenHeight(Services.app)
+private val screenWidth = DisplayUtil.getScreenWidth(Services.app)
 
 fun ImageView.loadNoCache(
         uri: Any?,
@@ -65,7 +70,7 @@ fun ImageView.loadAuto(
     load(uri, options, null, listener) { resource, _ ->
         resource?.let {
             layoutParams.width = -1
-            layoutParams.height = resource.intrinsicHeight
+            layoutParams.height = ((screenWidth.toFloat() / resource.intrinsicWidth) * resource.intrinsicHeight).toInt()
             requestLayout()
         }
         return@load false

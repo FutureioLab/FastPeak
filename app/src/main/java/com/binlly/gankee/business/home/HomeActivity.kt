@@ -45,7 +45,7 @@ class HomeActivity: BaseActivity() {
         pager.currentItem = 0
     }
 
-    override fun isNeedToolbar(): Boolean = true
+    override fun isNeedToolbar(): Boolean = false
 
     override fun customTitle(): String = "首页"
 }

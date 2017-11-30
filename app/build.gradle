@@ -175,6 +175,8 @@ dependencies {
     }
     kapt "com.github.hotchemi:permissionsdispatcher-processor:2.4.0"
 
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+
     implementation "org.aspectj:aspectjrt:$aspectj_version"
 
     testImplementation 'junit:junit:4.12'

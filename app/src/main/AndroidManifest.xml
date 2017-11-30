@@ -25,7 +25,7 @@
 
         <activity
             android:name=".business.home.HomeActivity"
-            android:theme="@style/PrimaryTheme">
+            android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -36,6 +36,13 @@
         <activity
             android:name=".business.web.WebActivity"
             android:theme="@style/PrimaryTheme"/>
+
+        <activity
+            android:name=".business.photo.PhotoViewActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/PhotoViewerTheme"/>
+
         <activity
             android:name=".business.test.TestActivity"
             android:theme="@style/PrimaryTheme"/>

@@ -13,8 +13,16 @@ import com.fangxin.assessment.base.adapter.QuickAdapter
 
 class GirlAdapter: QuickAdapter<FeedGirl, BaseViewHolder>(R.layout.item_home_girl) {
 
+    companion object {
+        val ACTION_TO_PREVIEW = 1
+    }
+
     override fun convert(holder: BaseViewHolder, item: FeedGirl) {
         val image = holder.getView<ImageView>(R.id.image)
         image.loadAuto(item.url)
+
+        holder.itemView.setOnClickListener {
+            sendMessage(ACTION_TO_PREVIEW, holder.adapterPosition, null, null, holder.itemView)
+        }
     }
 }
